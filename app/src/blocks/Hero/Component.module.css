@@ -1,0 +1,39 @@
+.root {
+  padding: var(--space-12) var(--space-8);
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+}
+
+.inner {
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heading {
+  margin: 0 0 var(--space-4);
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.subheading {
+  margin: 0 0 var(--space-8);
+  font-size: 20px;
+  color: var(--color-text-muted);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-8);
+  background: var(--color-accent);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+}
+
+.cta:hover {
+  text-decoration: none;
+  filter: brightness(0.95);
+}

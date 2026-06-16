@@ -1,0 +1,44 @@
+.root {
+  padding: var(--space-8);
+}
+
+.inner {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.inner h2,
+.inner h3,
+.inner h4 {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+  line-height: 1.25;
+}
+
+.inner h2 {
+  font-size: 32px;
+}
+
+.inner h3 {
+  font-size: 24px;
+}
+
+.inner h4 {
+  font-size: 20px;
+}
+
+.inner p {
+  margin: 0 0 var(--space-4);
+}
+
+.inner ul,
+.inner ol {
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-6);
+}
+
+.inner li {
+  margin-bottom: var(--space-2);
+}
