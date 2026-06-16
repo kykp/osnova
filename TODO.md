@@ -6,20 +6,25 @@
 
 - [x] Инициализировать git, добавить remote
 - [x] Зафиксировать правила в `CLAUDE.md`
-- [ ] Поставить Next 15 + Payload 3 через `create-payload-app` в `app/`
-- [ ] Добавить `docker-compose.yml` для Postgres
-- [ ] `.env.example` с `DATABASE_URI`, `PAYLOAD_SECRET`
-- [ ] Поднять `pnpm dev`, открыть `/admin`, создать первого юзера — убедиться что всё работает
-- [ ] Первый коммит, push в origin
+- [x] Поставить Next 16 + Payload 3 (Postgres) в `app/`
+- [x] `docker-compose.yml` для Postgres в корне
+- [x] `.env.example` с `DATABASE_URI`, `PAYLOAD_SECRET`
+- [x] Поднять `pnpm dev`, `/admin` отдаёт `create-first-user`
+- [x] Первый коммит (push в origin — ждёт подтверждения)
+- [ ] Создать первого пользователя руками через `/admin/create-first-user`
 
 ## Следующее (UX админки)
 
-- [ ] Русификация админки (`i18n` Payload)
+- [ ] Доделки русификации:
+  - [x] UI Payload — уже русский через `i18n.fallbackLanguage: 'ru'`
+  - [ ] Русские лейблы у *всех* полей коллекций (`label: '...'` на каждом field)
+  - [ ] Шаблоны писем (forgot/verify) — переопределить через `email.config`
+  - [ ] Определиться, нужен ли второй локаль (en) у контента документов
 - [ ] Минимальный набор коллекций под школу/сайт:
   - [ ] `Pages` (страницы с блоками)
-  - [ ] `Media` (изображения)
-  - [ ] `Users` (с ролями: `admin`, `editor`)
-  - [ ] `Settings` (Global: название сайта, контакты, лого)
+  - [x] `Media` (изображения) — есть базовая
+  - [ ] `Users` с ролями `admin` / `editor`
+  - [ ] `Settings` (Global: название сайта, описание, контакты, лого)
 - [ ] Базовые блоки контента: Hero, RichText, Image, Cards
 - [ ] Публичный фронт: главная, страница из коллекции `Pages`
 - [ ] Превью изменений в админке до публикации (drafts)

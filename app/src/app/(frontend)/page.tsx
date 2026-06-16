@@ -8,17 +8,27 @@ import styles from './page.module.css'
 export default async function HomePage() {
   const headers = await getHeaders()
   const payload = await getPayload({ config: await config })
-  const { user } = await payload.auth({ headers })
+  const [{ user }, settings] = await Promise.all([
+    payload.auth({ headers }),
+    payload.findGlobal({ slug: 'settings' }),
+  ])
+
+  const title = settings.siteTitle || 'Osnova'
+  const description = settings.siteDescription
 
   return (
     <main className={styles.root}>
       <section className={styles.content}>
-        <h1 className={styles.title}>Osnova</h1>
-        <p className={styles.lead}>
-          {user && 'email' in user
-            ? `Здравствуйте, ${user.email}. Сайт работает.`
-            : 'Платформа установлена. Сайт ещё пустой — наполните его в админке.'}
-        </p>
+        <h1 className={styles.title}>{title}</h1>
+        {description ? (
+          <p className={styles.lead}>{description}</p>
+        ) : (
+          <p className={styles.lead}>
+            {user && 'email' in user
+              ? `Здравствуйте, ${user.email}. Заполните настройки сайта в админке.`
+              : 'Платформа установлена. Заполните настройки сайта в админке.'}
+          </p>
+        )}
         <div className={styles.actions}>
           <a className={styles.primary} href="/admin">
             Войти в админку
