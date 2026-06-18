@@ -2,15 +2,21 @@ import type { CollectionConfig } from 'payload'
 
 import { isAdmin, isAuthenticated } from '../access'
 import { CardsBlock } from '../blocks/Cards/config'
+import { ContactFormBlock } from '../blocks/ContactForm/config'
+import { ContactsBlock } from '../blocks/Contacts/config'
 import { CTABlock } from '../blocks/CTA/config'
+import { DocumentsListBlock } from '../blocks/DocumentsList/config'
 import { FAQBlock } from '../blocks/FAQ/config'
 import { FeaturesBlock } from '../blocks/Features/config'
 import { HeroBlock } from '../blocks/Hero/config'
 import { ImageBlock } from '../blocks/Image/config'
+import { NewsListBlock } from '../blocks/NewsList/config'
+import { PartnersBlock } from '../blocks/Partners/config'
 import { ProcessBlock } from '../blocks/Process/config'
 import { RichTextBlock } from '../blocks/RichText/config'
 import { SliderBlock } from '../blocks/Slider/config'
 import { StatsBlock } from '../blocks/Stats/config'
+import { TeamBlock } from '../blocks/Team/config'
 import { TestimonialsBlock } from '../blocks/Testimonials/config'
 import { VideoBlock } from '../blocks/Video/config'
 import { slugify } from '../utils/slugify'
@@ -69,8 +75,14 @@ export const Pages: CollectionConfig = {
                 CardsBlock,
                 StatsBlock,
                 TestimonialsBlock,
+                TeamBlock,
+                PartnersBlock,
+                NewsListBlock,
+                DocumentsListBlock,
                 FAQBlock,
                 CTABlock,
+                ContactsBlock,
+                ContactFormBlock,
                 RichTextBlock,
                 ImageBlock,
                 VideoBlock,

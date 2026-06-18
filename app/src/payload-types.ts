@@ -73,6 +73,7 @@ export interface Config {
     news: News;
     documents: Document;
     staff: Staff;
+    'form-submissions': FormSubmission;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     news: NewsSelect<false> | NewsSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     staff: StaffSelect<false> | StaffSelect<true>;
+    'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -338,6 +340,59 @@ export interface Page {
           }
         | {
             heading?: string | null;
+            subheading?: string | null;
+            /**
+             * Сортировка по полю «Порядок» в коллекции «Сотрудники». 0 — показать всех.
+             */
+            limit?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'team';
+          }
+        | {
+            heading?: string | null;
+            items?:
+              | {
+                  logo: number | Media;
+                  /**
+                   * Используется как alt-текст для доступности.
+                   */
+                  name?: string | null;
+                  /**
+                   * Если задана, логотип станет ссылкой.
+                   */
+                  url?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'partners';
+          }
+        | {
+            heading?: string | null;
+            limit?: number | null;
+            allLinkLabel?: string | null;
+            /**
+             * Если оставить пустым — кнопка не показывается.
+             */
+            allLinkUrl?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'newsList';
+          }
+        | {
+            heading?: string | null;
+            /**
+             * Сортировка по дате документа (свежие сверху). 0 — показать все.
+             */
+            limit?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'documentsList';
+          }
+        | {
+            heading?: string | null;
             items?:
               | {
                   question: string;
@@ -366,6 +421,49 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'cta';
+          }
+        | {
+            heading?: string | null;
+            /**
+             * Например: «Москва, Тверская 1». Используется как метка на карте.
+             */
+            address?: string | null;
+            mapProvider?: ('yandex' | 'google' | 'none') | null;
+            /**
+             * От 1 (мир) до 20 (детально дом).
+             */
+            mapZoom?: number | null;
+            /**
+             * Если включено — показываются контакты из глобала «Настройки сайта → Контакты». Если выключено — можно указать другие тут же ниже.
+             */
+            showSettingsContacts?: boolean | null;
+            overrideEmail?: string | null;
+            overridePhone?: string | null;
+            /**
+             * Например: «Пн–Пт: 9:00–18:00, Сб–Вс: выходной».
+             */
+            workingHours?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contacts';
+          }
+        | {
+            heading?: string | null;
+            description?: string | null;
+            showMessageField?: boolean | null;
+            submitLabel?: string | null;
+            successMessage?: string | null;
+            /**
+             * Чекбокс согласия обязателен для отправки формы.
+             */
+            consentText?: string | null;
+            /**
+             * Если задан — в тексте согласия будет ссылка. Например: /politika.
+             */
+            consentPolicyUrl?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contactForm';
           }
         | {
             content: {
@@ -569,6 +667,23 @@ export interface Staff {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions".
+ */
+export interface FormSubmission {
+  id: number;
+  name: string;
+  phone?: string | null;
+  email?: string | null;
+  message?: string | null;
+  /**
+   * Откуда пришла заявка (адрес страницы или идентификатор блока).
+   */
+  source?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -614,6 +729,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'staff';
         value: number | Staff;
+      } | null)
+    | ({
+        relationTo: 'form-submissions';
+        value: number | FormSubmission;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -849,6 +968,48 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        team?:
+          | T
+          | {
+              heading?: T;
+              subheading?: T;
+              limit?: T;
+              id?: T;
+              blockName?: T;
+            };
+        partners?:
+          | T
+          | {
+              heading?: T;
+              items?:
+                | T
+                | {
+                    logo?: T;
+                    name?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        newsList?:
+          | T
+          | {
+              heading?: T;
+              limit?: T;
+              allLinkLabel?: T;
+              allLinkUrl?: T;
+              id?: T;
+              blockName?: T;
+            };
+        documentsList?:
+          | T
+          | {
+              heading?: T;
+              limit?: T;
+              id?: T;
+              blockName?: T;
+            };
         faq?:
           | T
           | {
@@ -875,6 +1036,33 @@ export interface PagesSelect<T extends boolean = true> {
                     url?: T;
                   };
               background?: T;
+              id?: T;
+              blockName?: T;
+            };
+        contacts?:
+          | T
+          | {
+              heading?: T;
+              address?: T;
+              mapProvider?: T;
+              mapZoom?: T;
+              showSettingsContacts?: T;
+              overrideEmail?: T;
+              overridePhone?: T;
+              workingHours?: T;
+              id?: T;
+              blockName?: T;
+            };
+        contactForm?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              showMessageField?: T;
+              submitLabel?: T;
+              successMessage?: T;
+              consentText?: T;
+              consentPolicyUrl?: T;
               id?: T;
               blockName?: T;
             };
@@ -991,6 +1179,19 @@ export interface StaffSelect<T extends boolean = true> {
   email?: T;
   phone?: T;
   sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions_select".
+ */
+export interface FormSubmissionsSelect<T extends boolean = true> {
+  name?: T;
+  phone?: T;
+  email?: T;
+  message?: T;
+  source?: T;
   updatedAt?: T;
   createdAt?: T;
 }

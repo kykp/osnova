@@ -14,7 +14,9 @@ import { Pages } from './collections/Pages'
 import { News } from './collections/News'
 import { Documents } from './collections/Documents'
 import { Staff } from './collections/Staff'
+import { FormSubmissions } from './collections/FormSubmissions'
 import { backupEndpoint } from './endpoints/backup'
+import { formSubmissionEndpoint } from './endpoints/formSubmission'
 import { MainMenu } from './globals/MainMenu'
 import { Settings } from './globals/Settings'
 
@@ -55,9 +57,9 @@ export default buildConfig({
       },
     },
   },
-  collections: [Users, Media, Pages, News, Documents, Staff],
+  collections: [Users, Media, Pages, News, Documents, Staff, FormSubmissions],
   globals: [Settings, MainMenu],
-  endpoints: [backupEndpoint],
+  endpoints: [backupEndpoint, formSubmissionEndpoint],
   editor: lexicalEditor(),
   email,
   secret: process.env.PAYLOAD_SECRET || '',
