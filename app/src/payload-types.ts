@@ -70,6 +70,9 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
+    news: News;
+    documents: Document;
+    staff: Staff;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +83,9 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
+    documents: DocumentsSelect<false> | DocumentsSelect<true>;
+    staff: StaffSelect<false> | StaffSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -91,9 +97,11 @@ export interface Config {
   fallbackLocale: ('false' | 'none' | 'null') | false | null | 'ru' | 'ru'[];
   globals: {
     settings: Setting;
+    'main-menu': MainMenu;
   };
   globalsSelect: {
     settings: SettingsSelect<false> | SettingsSelect<true>;
+    'main-menu': MainMenuSelect<false> | MainMenuSelect<true>;
   };
   locale: 'ru';
   widgets: {
@@ -156,6 +164,9 @@ export interface User {
  */
 export interface Media {
   id: number;
+  /**
+   * Что изображено на файле. Используется для доступности и SEO.
+   */
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -168,6 +179,40 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    feature?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    og?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -176,11 +221,6 @@ export interface Media {
 export interface Page {
   id: number;
   title: string;
-  /**
-   * Заполнится автоматически из заголовка. Можно править вручную.
-   */
-  slug: string;
-  status: 'draft' | 'published';
   layout?:
     | (
         | {
@@ -217,8 +257,167 @@ export interface Page {
             blockName?: string | null;
             blockType: 'richText';
           }
+        | {
+            image: number | Media;
+            caption?: string | null;
+            /**
+             * Если задана, картинка станет кликабельной.
+             */
+            url?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'image';
+          }
+        | {
+            heading?: string | null;
+            items?:
+              | {
+                  title: string;
+                  description?: string | null;
+                  image?: (number | null) | Media;
+                  /**
+                   * Если задана, вся плитка станет ссылкой.
+                   */
+                  url?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cards';
+          }
       )[]
     | null;
+  meta?: {
+    /**
+     * Если пусто — используется обычный заголовок страницы.
+     */
+    title?: string | null;
+    /**
+     * Показывается в выдаче Яндекса и Google.
+     */
+    description?: string | null;
+    /**
+     * Используется при шеринге ссылки в Telegram, ВК и т.п.
+     */
+    image?: (number | null) | Media;
+  };
+  /**
+   * Заполнится автоматически из заголовка. Можно править вручную.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news".
+ */
+export interface News {
+  id: number;
+  title: string;
+  /**
+   * Показывается в списке новостей и при шеринге в соцсетях.
+   */
+  excerpt?: string | null;
+  cover?: (number | null) | Media;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  meta?: {
+    /**
+     * Если пусто — используется обычный заголовок новости.
+     */
+    title?: string | null;
+    /**
+     * Если пусто — используется «Краткое описание» из вкладки «Содержимое».
+     */
+    description?: string | null;
+    /**
+     * Если пусто — используется обложка новости.
+     */
+    image?: (number | null) | Media;
+  };
+  /**
+   * Заполнится автоматически из заголовка. Можно править вручную.
+   */
+  slug: string;
+  /**
+   * Используется для сортировки в списке новостей.
+   */
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents".
+ */
+export interface Document {
+  id: number;
+  /**
+   * Как документ будет называться на сайте.
+   */
+  title: string;
+  /**
+   * Короткое пояснение к документу. Необязательно.
+   */
+  description?: string | null;
+  /**
+   * Дата самого документа.
+   */
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staff".
+ */
+export interface Staff {
+  id: number;
+  lastName: string;
+  firstName: string;
+  middleName?: string | null;
+  fullName?: string | null;
+  /**
+   * Должность сотрудника. Отображается рядом с фамилией.
+   */
+  position: string;
+  photo?: (number | null) | Media;
+  /**
+   * Краткая справка: образование, опыт, награды.
+   */
+  bio?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  /**
+   * Меньше число — выше в списке. По умолчанию 100.
+   */
+  sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -257,6 +456,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'news';
+        value: number | News;
+      } | null)
+    | ({
+        relationTo: 'documents';
+        value: number | Document;
+      } | null)
+    | ({
+        relationTo: 'staff';
+        value: number | Staff;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -341,6 +552,50 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        feature?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        og?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -348,8 +603,6 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
-  slug?: T;
-  status?: T;
   layout?:
     | T
     | {
@@ -374,7 +627,101 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        image?:
+          | T
+          | {
+              image?: T;
+              caption?: T;
+              url?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cards?:
+          | T
+          | {
+              heading?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    image?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news_select".
+ */
+export interface NewsSelect<T extends boolean = true> {
+  title?: T;
+  excerpt?: T;
+  cover?: T;
+  content?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  slug?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents_select".
+ */
+export interface DocumentsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staff_select".
+ */
+export interface StaffSelect<T extends boolean = true> {
+  lastName?: T;
+  firstName?: T;
+  middleName?: T;
+  fullName?: T;
+  position?: T;
+  photo?: T;
+  bio?: T;
+  email?: T;
+  phone?: T;
+  sortOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -424,13 +771,67 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Setting {
   id: number;
-  siteTitle: string;
   /**
-   * Используется в meta description и в шапке сайта.
+   * PNG (прозрачный) или SVG, горизонтальный, от 560×160 px.
+   */
+  logo?: (number | null) | Media;
+  /**
+   * PNG или SVG, квадратная, от 128×128 px.
+   */
+  siteIcon?: (number | null) | Media;
+  /**
+   * Показывается рядом с логотипом, во вкладке браузера и в поисковой выдаче. Если логотип уже содержит название — можно оставить пустым.
+   */
+  siteTitle?: string | null;
+  /**
+   * Для поисковиков и шеринга ссылок в соцсетях. На самом сайте не отображается.
    */
   siteDescription?: string | null;
+  /**
+   * Какую страницу показывать на корне сайта (адрес /). Если не выбрана — отображается экран первой настройки.
+   */
+  homePage?: (number | null) | Page;
+  /**
+   * Основной адрес, на который пишут пользователи сайта. Подтягивается в блоки контактов и в подвал.
+   */
   contactEmail?: string | null;
+  /**
+   * Основной номер для связи. Подтягивается в блоки контактов и в подвал.
+   */
   contactPhone?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "main-menu".
+ */
+export interface MainMenu {
+  id: number;
+  items?:
+    | {
+        label: string;
+        target: 'page' | 'url';
+        page?: (number | null) | Page;
+        /**
+         * Полный адрес: https://...
+         */
+        url?: string | null;
+        children?:
+          | {
+              label: string;
+              target: 'page' | 'url';
+              page?: (number | null) | Page;
+              /**
+               * Полный адрес: https://...
+               */
+              url?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -439,10 +840,40 @@ export interface Setting {
  * via the `definition` "settings_select".
  */
 export interface SettingsSelect<T extends boolean = true> {
+  logo?: T;
+  siteIcon?: T;
   siteTitle?: T;
   siteDescription?: T;
+  homePage?: T;
   contactEmail?: T;
   contactPhone?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "main-menu_select".
+ */
+export interface MainMenuSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        label?: T;
+        target?: T;
+        page?: T;
+        url?: T;
+        children?:
+          | T
+          | {
+              label?: T;
+              target?: T;
+              page?: T;
+              url?: T;
+              id?: T;
+            };
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

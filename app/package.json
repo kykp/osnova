@@ -12,10 +12,12 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
-    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload"
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "backup": "bash scripts/backup.sh"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "latest",
+    "@payloadcms/email-nodemailer": "^3.85.1",
     "@payloadcms/next": "latest",
     "@payloadcms/richtext-lexical": "latest",
     "@payloadcms/translations": "^3.85.1",

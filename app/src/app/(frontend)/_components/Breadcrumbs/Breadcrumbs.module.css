@@ -1,0 +1,39 @@
+.root {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-6) 0;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.link {
+  color: var(--color-text-muted);
+}
+
+.link:hover {
+  color: var(--color-accent);
+}
+
+.current {
+  color: var(--color-text);
+}
+
+.sep {
+  color: var(--color-border);
+}

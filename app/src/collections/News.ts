@@ -1,24 +1,21 @@
 import type { CollectionConfig } from 'payload'
 
 import { isAdmin, isAuthenticated } from '../access'
-import { CardsBlock } from '../blocks/Cards/config'
-import { HeroBlock } from '../blocks/Hero/config'
-import { ImageBlock } from '../blocks/Image/config'
-import { RichTextBlock } from '../blocks/RichText/config'
 import { slugify } from '../utils/slugify'
 
-export const Pages: CollectionConfig = {
-  slug: 'pages',
+export const News: CollectionConfig = {
+  slug: 'news',
   labels: {
-    singular: 'Страница',
-    plural: 'Страницы',
+    singular: 'Новость',
+    plural: 'Новости',
   },
+  defaultSort: '-publishedAt',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', '_status', 'updatedAt'],
+    defaultColumns: ['title', 'publishedAt', '_status', 'updatedAt'],
     preview: (doc) => {
       if (typeof doc?.slug !== 'string' || !doc.slug) return null
-      return `/preview?slug=${encodeURIComponent(doc.slug)}`
+      return `/preview?slug=${encodeURIComponent(doc.slug)}&collection=news`
     },
   },
   versions: {
@@ -50,11 +47,23 @@ export const Pages: CollectionConfig = {
               required: true,
             },
             {
-              name: 'layout',
-              type: 'blocks',
-              label: 'Блоки',
-              labels: { singular: 'Блок', plural: 'Блоки' },
-              blocks: [HeroBlock, RichTextBlock, ImageBlock, CardsBlock],
+              name: 'excerpt',
+              type: 'textarea',
+              label: 'Краткое описание',
+              admin: {
+                description: 'Показывается в списке новостей и при шеринге в соцсетях.',
+              },
+            },
+            {
+              name: 'cover',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Обложка',
+            },
+            {
+              name: 'content',
+              type: 'richText',
+              label: 'Текст новости',
             },
           ],
         },
@@ -71,7 +80,7 @@ export const Pages: CollectionConfig = {
                   type: 'text',
                   label: 'Заголовок для поисковиков (title)',
                   admin: {
-                    description: 'Если пусто — используется обычный заголовок страницы.',
+                    description: 'Если пусто — используется обычный заголовок новости.',
                   },
                 },
                 {
@@ -79,7 +88,7 @@ export const Pages: CollectionConfig = {
                   type: 'textarea',
                   label: 'Краткое описание (meta description)',
                   admin: {
-                    description: 'Показывается в выдаче Яндекса и Google.',
+                    description: 'Если пусто — используется «Краткое описание» из вкладки «Содержимое».',
                   },
                 },
                 {
@@ -88,7 +97,7 @@ export const Pages: CollectionConfig = {
                   relationTo: 'media',
                   label: 'Картинка для соцсетей (og:image)',
                   admin: {
-                    description: 'Используется при шеринге ссылки в Telegram, ВК и т.п.',
+                    description: 'Если пусто — используется обложка новости.',
                   },
                 },
               ],
@@ -116,6 +125,20 @@ export const Pages: CollectionConfig = {
             return value
           },
         ],
+      },
+    },
+    {
+      name: 'publishedAt',
+      type: 'date',
+      label: 'Дата публикации',
+      defaultValue: () => new Date().toISOString(),
+      admin: {
+        position: 'sidebar',
+        description: 'Используется для сортировки в списке новостей.',
+        date: {
+          pickerAppearance: 'dayAndTime',
+          displayFormat: 'dd.MM.yyyy HH:mm',
+        },
       },
     },
   ],

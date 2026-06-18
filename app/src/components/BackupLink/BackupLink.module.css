@@ -1,0 +1,27 @@
+.wrap {
+  margin: 16px 0 8px;
+  padding: 12px;
+  border: 1px solid var(--theme-border-color, #e5e7eb);
+  border-radius: 6px;
+}
+
+.link {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--theme-text, #111827);
+}
+
+.hint {
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: var(--theme-text-light, #6b7280);
+  line-height: 1.4;
+}
+
+.hint code {
+  font-size: 11px;
+  padding: 1px 4px;
+  background: var(--theme-elevation-100, #f3f4f6);
+  border-radius: 3px;
+}
