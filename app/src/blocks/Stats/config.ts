@@ -1,0 +1,45 @@
+import type { Block } from 'payload'
+
+export const StatsBlock: Block = {
+  slug: 'stats',
+  labels: {
+    singular: 'Доверие — Статистика',
+    plural: 'Доверие — Статистика',
+  },
+  fields: [
+    {
+      name: 'heading',
+      type: 'text',
+      label: 'Заголовок секции',
+    },
+    {
+      name: 'subheading',
+      type: 'textarea',
+      label: 'Подзаголовок',
+    },
+    {
+      name: 'items',
+      type: 'array',
+      label: 'Цифры',
+      labels: { singular: 'Цифра', plural: 'Цифры' },
+      minRows: 1,
+      maxRows: 6,
+      fields: [
+        {
+          name: 'value',
+          type: 'text',
+          label: 'Значение',
+          required: true,
+          admin: { description: 'Например: 5000+, 25, 99.9%, ₽1.2 млрд.' },
+        },
+        {
+          name: 'label',
+          type: 'text',
+          label: 'Подпись',
+          required: true,
+          admin: { description: 'Что обозначает цифра. Например: «учеников», «лет на рынке».' },
+        },
+      ],
+    },
+  ],
+}

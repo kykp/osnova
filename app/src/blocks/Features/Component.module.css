@@ -1,0 +1,130 @@
+.root {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-6);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.heading {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 var(--space-3);
+}
+
+.subheading {
+  color: var(--color-text-muted);
+  font-size: 17px;
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+/* --- icons-grid --- */
+.iconsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-6);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.iconCard {
+  padding: var(--space-6);
+  background: var(--color-bg);
+}
+
+.icon {
+  font-size: 32px;
+  line-height: 1;
+  margin-bottom: var(--space-3);
+}
+
+/* --- cards-metric --- */
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.metricCard {
+  padding: var(--space-6);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.metric {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+  margin-bottom: var(--space-3);
+}
+
+/* --- tabs --- */
+.tabs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.tabsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-2);
+}
+
+.tab,
+.tabActive {
+  background: transparent;
+  border: none;
+  padding: var(--space-2) var(--space-4);
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--color-text);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.tab:hover {
+  background: rgba(37, 99, 235, 0.06);
+}
+
+.tabActive {
+  background: rgba(37, 99, 235, 0.12);
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.tabIcon {
+  font-size: 18px;
+}
+
+.tabPanel {
+  padding: var(--space-4) 0;
+}
+
+/* --- shared --- */
+.itemTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 var(--space-2);
+}
+
+.itemDesc {
+  color: var(--color-text-muted);
+  font-size: 15px;
+  margin: 0;
+}

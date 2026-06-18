@@ -2,9 +2,13 @@ import type { CollectionConfig } from 'payload'
 
 import { isAdmin, isAuthenticated } from '../access'
 import { CardsBlock } from '../blocks/Cards/config'
+import { CTABlock } from '../blocks/CTA/config'
+import { FAQBlock } from '../blocks/FAQ/config'
+import { FeaturesBlock } from '../blocks/Features/config'
 import { HeroBlock } from '../blocks/Hero/config'
 import { ImageBlock } from '../blocks/Image/config'
 import { RichTextBlock } from '../blocks/RichText/config'
+import { StatsBlock } from '../blocks/Stats/config'
 import { slugify } from '../utils/slugify'
 
 export const Pages: CollectionConfig = {
@@ -54,7 +58,16 @@ export const Pages: CollectionConfig = {
               type: 'blocks',
               label: 'Блоки',
               labels: { singular: 'Блок', plural: 'Блоки' },
-              blocks: [HeroBlock, RichTextBlock, ImageBlock, CardsBlock],
+              blocks: [
+                HeroBlock,
+                FeaturesBlock,
+                CardsBlock,
+                StatsBlock,
+                FAQBlock,
+                CTABlock,
+                RichTextBlock,
+                ImageBlock,
+              ],
             },
           ],
         },

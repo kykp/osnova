@@ -3,8 +3,8 @@ import type { Block } from 'payload'
 export const RichTextBlock: Block = {
   slug: 'richText',
   labels: {
-    singular: 'Текст',
-    plural: 'Текстовые блоки',
+    singular: 'Контент — Текст',
+    plural: 'Контент — Текст',
   },
   fields: [
     {

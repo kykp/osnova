@@ -238,6 +238,98 @@ export interface Page {
             blockType: 'hero';
           }
         | {
+            heading?: string | null;
+            subheading?: string | null;
+            variant: 'icons-grid' | 'cards-metric' | 'tabs';
+            items?:
+              | {
+                  /**
+                   * Эмодзи или символ, например 🚀, 💎, ✓. Используется в вариантах «Сетка с иконками» и «Табы».
+                   */
+                  icon?: string | null;
+                  /**
+                   * Только для варианта «Карточки с метрикой». Например: 30%, 5×, 99.9%, 1000+.
+                   */
+                  metric?: string | null;
+                  title: string;
+                  description?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'features';
+          }
+        | {
+            heading?: string | null;
+            items?:
+              | {
+                  title: string;
+                  description?: string | null;
+                  image?: (number | null) | Media;
+                  /**
+                   * Если задана, вся плитка станет ссылкой.
+                   */
+                  url?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cards';
+          }
+        | {
+            heading?: string | null;
+            subheading?: string | null;
+            items?:
+              | {
+                  /**
+                   * Например: 5000+, 25, 99.9%, ₽1.2 млрд.
+                   */
+                  value: string;
+                  /**
+                   * Что обозначает цифра. Например: «учеников», «лет на рынке».
+                   */
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stats';
+          }
+        | {
+            heading?: string | null;
+            items?:
+              | {
+                  question: string;
+                  answer: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            heading: string;
+            subheading?: string | null;
+            button?: {
+              label?: string | null;
+              /**
+               * Внутренний путь (/о-нас) или внешний (https://...).
+               */
+              url?: string | null;
+            };
+            /**
+             * Необязательная фоновая картинка. Текст будет показан поверх неё с тёмной накладкой для читаемости.
+             */
+            background?: (number | null) | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+        | {
             content: {
               root: {
                 type: string;
@@ -267,24 +359,6 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'image';
-          }
-        | {
-            heading?: string | null;
-            items?:
-              | {
-                  title: string;
-                  description?: string | null;
-                  image?: (number | null) | Media;
-                  /**
-                   * Если задана, вся плитка станет ссылкой.
-                   */
-                  url?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'cards';
           }
       )[]
     | null;
@@ -620,19 +694,21 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        richText?:
+        features?:
           | T
           | {
-              content?: T;
-              id?: T;
-              blockName?: T;
-            };
-        image?:
-          | T
-          | {
-              image?: T;
-              caption?: T;
-              url?: T;
+              heading?: T;
+              subheading?: T;
+              variant?: T;
+              items?:
+                | T
+                | {
+                    icon?: T;
+                    metric?: T;
+                    title?: T;
+                    description?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -649,6 +725,66 @@ export interface PagesSelect<T extends boolean = true> {
                     url?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        stats?:
+          | T
+          | {
+              heading?: T;
+              subheading?: T;
+              items?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              heading?: T;
+              items?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              heading?: T;
+              subheading?: T;
+              button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              background?: T;
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        image?:
+          | T
+          | {
+              image?: T;
+              caption?: T;
+              url?: T;
               id?: T;
               blockName?: T;
             };
