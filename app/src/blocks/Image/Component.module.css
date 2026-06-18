@@ -1,9 +1,9 @@
 .root {
-  padding: var(--space-8);
+  padding: var(--section-y) var(--section-x);
 }
 
 .figure {
-  max-width: 880px;
+  max-width: var(--container);
   margin: 0 auto;
   padding: 0;
 }
@@ -12,7 +12,7 @@
   display: block;
   width: 100%;
   height: auto;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
 }
 
 .link {
@@ -24,8 +24,8 @@
 }
 
 .caption {
-  margin-top: var(--space-3);
-  font-size: 14px;
+  margin-top: var(--space-4);
+  font-size: var(--fs-small);
   color: var(--color-text-muted);
   text-align: center;
 }

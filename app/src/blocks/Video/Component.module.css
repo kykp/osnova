@@ -1,13 +1,14 @@
 .root {
-  max-width: 1000px;
+  max-width: var(--container);
   margin: 0 auto;
-  padding: var(--space-12) var(--space-6);
+  padding: var(--section-y) var(--section-x);
 }
 
 .heading {
-  font-size: 32px;
+  font-size: var(--fs-h2);
   font-weight: 700;
-  margin: 0 0 var(--space-6);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-8);
   text-align: center;
 }
 
@@ -22,9 +23,10 @@
   position: relative;
   width: 100%;
   height: 0;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  background: #000;
+  background: var(--color-bg-inverse);
+  box-shadow: var(--shadow-lg);
 }
 
 .ratio169 {
@@ -54,8 +56,8 @@
 }
 
 .caption {
-  margin-top: var(--space-3);
+  margin-top: var(--space-4);
   text-align: center;
   color: var(--color-text-muted);
-  font-size: 14px;
+  font-size: var(--fs-small);
 }

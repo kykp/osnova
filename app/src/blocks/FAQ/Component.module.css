@@ -1,41 +1,38 @@
 .root {
   max-width: 800px;
   margin: 0 auto;
-  padding: var(--space-12) var(--space-6);
+  padding: var(--section-y) var(--section-x);
 }
 
 .heading {
-  font-size: 32px;
+  font-size: var(--fs-h2);
   font-weight: 700;
-  margin: 0 0 var(--space-8);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-12);
   text-align: center;
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  border-top: 1px solid var(--color-border);
 }
 
 .item {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background: var(--color-bg);
-  overflow: hidden;
-}
-
-.item[open] {
-  border-color: var(--color-accent);
+  border-bottom: 1px solid var(--color-border);
+  background: transparent;
 }
 
 .question {
   cursor: pointer;
-  padding: var(--space-4) var(--space-6);
+  padding: var(--space-5) 0;
   font-weight: 600;
-  font-size: 16px;
+  font-size: var(--fs-h4);
+  letter-spacing: var(--tracking-tight);
   list-style: none;
   position: relative;
   padding-right: var(--space-12);
+  transition: color var(--t-fast) var(--ease-out);
 }
 
 .question::-webkit-details-marker {
@@ -43,26 +40,31 @@
 }
 
 .question::after {
-  content: '+';
+  content: '';
   position: absolute;
-  right: var(--space-6);
+  right: 4px;
   top: 50%;
-  transform: translateY(-50%);
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--color-text-muted);
-  transition: transform 150ms ease;
+  width: 14px;
+  height: 14px;
+  border-right: 2px solid var(--color-text);
+  border-bottom: 2px solid var(--color-text);
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform var(--t-base) var(--ease-out);
 }
 
 .item[open] .question::after {
-  content: '−';
-  color: var(--color-accent);
+  transform: translateY(-30%) rotate(-135deg);
+}
+
+.item[open] .question {
+  color: var(--color-text);
 }
 
 .answer {
-  padding: 0 var(--space-6) var(--space-4);
-  color: var(--color-text);
-  font-size: 15px;
+  padding: 0 0 var(--space-6);
+  color: var(--color-text-muted);
+  font-size: var(--fs-body);
   line-height: 1.6;
   white-space: pre-wrap;
+  max-width: 65ch;
 }

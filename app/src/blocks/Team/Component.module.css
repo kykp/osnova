@@ -1,70 +1,77 @@
 .root {
-  max-width: 1120px;
+  max-width: var(--container);
   margin: 0 auto;
-  padding: var(--space-12) var(--space-6);
+  padding: var(--section-y) var(--section-x);
 }
 
 .header {
   text-align: center;
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-12);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .heading {
-  font-size: 32px;
+  font-size: var(--fs-h2);
   font-weight: 700;
+  letter-spacing: var(--tracking-tight);
   margin: 0 0 var(--space-3);
 }
 
 .subheading {
   color: var(--color-text-muted);
-  font-size: 17px;
-  margin: 0 auto;
-  max-width: 720px;
+  font-size: var(--fs-lead);
+  margin: 0;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: var(--space-6);
+  gap: var(--space-8) var(--space-6);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .card {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
 
 .photo {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   display: block;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-subtle);
 }
 
 .body {
-  padding: var(--space-4) var(--space-6) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
 }
 
 .name {
   font-weight: 600;
-  font-size: 17px;
-  margin-bottom: var(--space-2);
+  font-size: var(--fs-h4);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.25;
 }
 
 .position {
-  color: var(--color-accent);
-  font-size: 14px;
-  margin-bottom: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--fs-small);
+  margin-bottom: var(--space-2);
 }
 
 .bio {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--fs-small);
   color: var(--color-text-muted);
-  line-height: 1.5;
+  line-height: 1.55;
   white-space: pre-wrap;
 }

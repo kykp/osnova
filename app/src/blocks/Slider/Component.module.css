@@ -1,26 +1,28 @@
 .root {
-  max-width: 1120px;
+  max-width: var(--container);
   margin: 0 auto;
-  padding: var(--space-12) var(--space-6);
+  padding: var(--section-y) var(--section-x);
 }
 
 .heading {
-  font-size: 32px;
+  font-size: var(--fs-h2);
   font-weight: 700;
-  margin: 0 0 var(--space-6);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-8);
   text-align: center;
 }
 
 .frame {
   position: relative;
   overflow: hidden;
-  border-radius: var(--radius-md);
-  background: #000;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-inverse);
+  box-shadow: var(--shadow-md);
 }
 
 .track {
   display: flex;
-  transition: transform 400ms ease;
+  transition: transform 500ms var(--ease-out);
   will-change: transform;
 }
 
@@ -49,66 +51,73 @@
   left: 0;
   right: 0;
   bottom: 0;
-  padding: var(--space-4) var(--space-6);
+  padding: var(--space-8) var(--space-8) var(--space-12);
   color: white;
   background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.7));
-  font-size: 16px;
-  font-weight: 500;
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
 }
 
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
   border: none;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: white;
-  font-size: 28px;
+  font-size: 24px;
   line-height: 1;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: inherit;
+  transition: background var(--t-fast) var(--ease-out);
 }
 
 .arrow:hover {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .arrowPrev {
-  left: var(--space-3);
+  left: var(--space-4);
 }
 
 .arrowNext {
-  right: var(--space-3);
+  right: var(--space-4);
 }
 
 .dots {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: var(--space-3);
+  bottom: var(--space-4);
   display: flex;
   justify-content: center;
   gap: var(--space-2);
+  z-index: 1;
 }
 
 .dot,
 .dotActive {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   border: none;
   background: rgba(255, 255, 255, 0.4);
   cursor: pointer;
   padding: 0;
-  transition: background 150ms ease;
+  transition: all var(--t-fast) var(--ease-out);
 }
 
 .dotActive {
   background: white;
+  width: 24px;
+  border-radius: var(--radius-pill);
 }

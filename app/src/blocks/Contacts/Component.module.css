@@ -1,33 +1,35 @@
 .root {
-  max-width: 1120px;
+  max-width: var(--container);
   margin: 0 auto;
-  padding: var(--space-12) var(--space-6);
+  padding: var(--section-y) var(--section-x);
 }
 
 .heading {
-  font-size: 32px;
+  font-size: var(--fs-h2);
   font-weight: 700;
-  margin: 0 0 var(--space-8);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-12);
   text-align: center;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: var(--space-6);
-  align-items: start;
+  grid-template-columns: 1fr 1.5fr;
+  gap: var(--space-12);
+  align-items: stretch;
 }
 
 @media (max-width: 720px) {
   .grid {
     grid-template-columns: 1fr;
+    gap: var(--space-8);
   }
 }
 
 .info {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-8);
 }
 
 .row {
@@ -37,34 +39,37 @@
 }
 
 .rowLabel {
-  font-size: 13px;
+  font-size: var(--fs-caption);
   color: var(--color-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--tracking-eyebrow);
+  font-weight: 600;
 }
 
 .rowValue {
-  font-size: 16px;
+  font-size: var(--fs-lead);
   white-space: pre-wrap;
+  letter-spacing: var(--tracking-tight);
 }
 
 .rowValueLink {
-  font-size: 16px;
+  font-size: var(--fs-lead);
   color: var(--color-text);
-  border-bottom: 1px dashed var(--color-border);
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
+  transition: color var(--t-fast);
 }
 
 .rowValueLink:hover {
   color: var(--color-accent);
-  border-color: var(--color-accent);
   text-decoration: none;
 }
 
 .mapWrap {
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--color-border);
-  aspect-ratio: 16 / 10;
+  background: var(--color-bg-subtle);
+  min-height: 360px;
 }
 
 .map {
