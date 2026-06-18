@@ -6,6 +6,8 @@ export const TestimonialsBlock: Block = {
     singular: 'Доверие — Отзывы',
     plural: 'Доверие — Отзывы',
   },
+  imageURL: '/block-previews/testimonials.svg',
+  imageAltText: 'Превью: две карточки отзывов с цитатами и фото авторов',
   fields: [
     {
       name: 'heading',

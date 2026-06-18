@@ -6,6 +6,8 @@ export const SliderBlock: Block = {
     singular: 'Контент — Слайдер',
     plural: 'Контент — Слайдер',
   },
+  imageURL: '/block-previews/slider.svg',
+  imageAltText: 'Превью: слайдер с картинкой, стрелками и точками навигации',
   fields: [
     {
       name: 'heading',

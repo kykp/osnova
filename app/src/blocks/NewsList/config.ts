@@ -6,6 +6,8 @@ export const NewsListBlock: Block = {
     singular: 'Доверие — Анонсы новостей',
     plural: 'Доверие — Анонсы новостей',
   },
+  imageURL: '/block-previews/news-list.svg',
+  imageAltText: 'Превью: три карточки новостей с обложками',
   fields: [
     {
       name: 'heading',

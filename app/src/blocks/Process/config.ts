@@ -6,6 +6,8 @@ export const ProcessBlock: Block = {
     singular: 'О проекте — Этапы',
     plural: 'О проекте — Этапы',
   },
+  imageURL: '/block-previews/process.svg',
+  imageAltText: 'Превью: нумерованные шаги, соединённые линией',
   fields: [
     {
       name: 'heading',

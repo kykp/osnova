@@ -6,6 +6,8 @@ export const TeamBlock: Block = {
     singular: 'Доверие — Команда',
     plural: 'Доверие — Команда',
   },
+  imageURL: '/block-previews/team.svg',
+  imageAltText: 'Превью: три карточки сотрудников с фото и должностями',
   fields: [
     {
       name: 'heading',

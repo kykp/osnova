@@ -6,6 +6,8 @@ export const FeaturesBlock: Block = {
     singular: 'Выгоды — Преимущества',
     plural: 'Выгоды — Преимущества',
   },
+  imageURL: '/block-previews/features.svg',
+  imageAltText: 'Превью: сетка из трёх пунктов с иконками',
   fields: [
     {
       name: 'heading',

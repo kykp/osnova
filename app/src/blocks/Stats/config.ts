@@ -6,6 +6,8 @@ export const StatsBlock: Block = {
     singular: 'Доверие — Статистика',
     plural: 'Доверие — Статистика',
   },
+  imageURL: '/block-previews/stats.svg',
+  imageAltText: 'Превью: ряд крупных цифр с подписями',
   fields: [
     {
       name: 'heading',

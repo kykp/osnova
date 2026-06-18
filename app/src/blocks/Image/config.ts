@@ -6,6 +6,8 @@ export const ImageBlock: Block = {
     singular: 'Контент — Картинка',
     plural: 'Контент — Картинки',
   },
+  imageURL: '/block-previews/image.svg',
+  imageAltText: 'Превью: картинка с подписью под ней',
   fields: [
     {
       name: 'image',

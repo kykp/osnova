@@ -6,6 +6,8 @@ export const CTABlock: Block = {
     singular: 'Целевое действие — CTA',
     plural: 'Целевое действие — CTA',
   },
+  imageURL: '/block-previews/cta.svg',
+  imageAltText: 'Превью: цветная плашка с заголовком и кнопкой',
   fields: [
     {
       name: 'heading',

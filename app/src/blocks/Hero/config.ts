@@ -6,6 +6,8 @@ export const HeroBlock: Block = {
     singular: 'Первый экран — Hero',
     plural: 'Первый экран — Hero',
   },
+  imageURL: '/block-previews/hero.svg',
+  imageAltText: 'Превью: заголовок, подзаголовок и кнопка по центру',
   fields: [
     {
       name: 'heading',

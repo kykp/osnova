@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160">
+  <rect width="240" height="160" fill="#f3f4f6"/>
+  <rect x="18" y="22" width="62" height="44" rx="4" fill="#d1d5db"/>
+  <circle cx="68" cy="36" r="4" fill="#9ca3af"/>
+  <polygon points="22,62 38,46 50,56 62,42 78,62" fill="#9ca3af"/>
+  <rect x="20" y="74" width="40" height="5" rx="2" fill="#6b7280"/>
+  <rect x="20" y="84" width="58" height="4" rx="2" fill="#9ca3af"/>
+  <rect x="20" y="92" width="50" height="4" rx="2" fill="#9ca3af"/>
+
+  <rect x="89" y="22" width="62" height="44" rx="4" fill="#d1d5db"/>
+  <circle cx="139" cy="36" r="4" fill="#9ca3af"/>
+  <polygon points="93,62 109,46 121,56 133,42 149,62" fill="#9ca3af"/>
+  <rect x="91" y="74" width="40" height="5" rx="2" fill="#6b7280"/>
+  <rect x="91" y="84" width="58" height="4" rx="2" fill="#9ca3af"/>
+  <rect x="91" y="92" width="50" height="4" rx="2" fill="#9ca3af"/>
+
+  <rect x="160" y="22" width="62" height="44" rx="4" fill="#d1d5db"/>
+  <circle cx="210" cy="36" r="4" fill="#9ca3af"/>
+  <polygon points="164,62 180,46 192,56 204,42 220,62" fill="#9ca3af"/>
+  <rect x="162" y="74" width="40" height="5" rx="2" fill="#6b7280"/>
+  <rect x="162" y="84" width="58" height="4" rx="2" fill="#9ca3af"/>
+  <rect x="162" y="92" width="50" height="4" rx="2" fill="#9ca3af"/>
+</svg>

@@ -6,6 +6,8 @@ export const PartnersBlock: Block = {
     singular: 'Доверие — Логотипы партнёров',
     plural: 'Доверие — Логотипы партнёров',
   },
+  imageURL: '/block-previews/partners.svg',
+  imageAltText: 'Превью: сетка логотипов партнёров',
   fields: [
     {
       name: 'heading',

@@ -6,6 +6,8 @@ export const ContactFormBlock: Block = {
     singular: 'Целевое действие — Форма заявки',
     plural: 'Целевое действие — Форма заявки',
   },
+  imageURL: '/block-previews/contact-form.svg',
+  imageAltText: 'Превью: форма с полями ввода и кнопкой «Отправить»',
   fields: [
     {
       name: 'heading',

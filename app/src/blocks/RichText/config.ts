@@ -6,6 +6,8 @@ export const RichTextBlock: Block = {
     singular: 'Контент — Текст',
     plural: 'Контент — Текст',
   },
+  imageURL: '/block-previews/rich-text.svg',
+  imageAltText: 'Превью: блок текста с заголовком и абзацами',
   fields: [
     {
       name: 'content',

@@ -6,6 +6,8 @@ export const CardsBlock: Block = {
     singular: 'Выгоды — Плитки',
     plural: 'Выгоды — Плитки',
   },
+  imageURL: '/block-previews/cards.svg',
+  imageAltText: 'Превью: три карточки с картинкой и описанием',
   fields: [
     {
       name: 'heading',

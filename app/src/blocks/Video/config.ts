@@ -6,6 +6,8 @@ export const VideoBlock: Block = {
     singular: 'Контент — Видео',
     plural: 'Контент — Видео',
   },
+  imageURL: '/block-previews/video.svg',
+  imageAltText: 'Превью: плеер с кнопкой воспроизведения',
   fields: [
     {
       name: 'heading',

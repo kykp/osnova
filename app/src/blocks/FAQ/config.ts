@@ -6,6 +6,8 @@ export const FAQBlock: Block = {
     singular: 'Доверие — Частые вопросы',
     plural: 'Доверие — Частые вопросы',
   },
+  imageURL: '/block-previews/faq.svg',
+  imageAltText: 'Превью: раскрывающиеся блоки с вопросами и ответами',
   fields: [
     {
       name: 'heading',

@@ -6,6 +6,8 @@ export const ContactsBlock: Block = {
     singular: 'Целевое действие — Контакты',
     plural: 'Целевое действие — Контакты',
   },
+  imageURL: '/block-previews/contacts.svg',
+  imageAltText: 'Превью: контактная информация слева и карта справа',
   fields: [
     {
       name: 'heading',
