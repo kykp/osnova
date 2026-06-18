@@ -2,8 +2,6 @@ import React from 'react'
 
 import type { MainMenu, Page } from '@/payload-types'
 
-import styles from './SiteHeader.module.css'
-
 type MenuItem = NonNullable<MainMenu['items']>[number]
 type SubItem = NonNullable<MenuItem['children']>[number]
 
@@ -35,56 +33,54 @@ export function SiteHeader({
   const items = menu?.items ?? []
 
   return (
-    <header className={styles.root}>
-      <div className={styles.inner}>
-        <a href="/" className={styles.brand}>
+    <header className="nav">
+      <div className="container nav-in">
+        <a className="brand" href="/" aria-label={title || 'Главная'}>
           {logo ? (
             <img
               src={logo.url}
               alt={logo.alt || title}
               width={logo.width ?? undefined}
               height={logo.height ?? undefined}
-              className={styles.logo}
+              style={{ maxHeight: 36, width: 'auto' }}
             />
+          ) : (
+            <span className="logo" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" />
+              </svg>
+            </span>
+          )}
+          {title ? (
+            <span>
+              <b>{title}</b>
+            </span>
           ) : null}
-          {title ? <span className={styles.brandTitle}>{title}</span> : null}
         </a>
+
         {items.length > 0 ? (
-          <nav className={styles.nav} aria-label="Главное меню">
-            <ul className={styles.list}>
-              {items.map((item) => {
-                const href = resolveHref(item)
-                const children = item.children ?? []
-                return (
-                  <li key={item.id} className={styles.item}>
-                    {href ? (
-                      <a className={styles.link} href={href}>
-                        {item.label}
-                      </a>
-                    ) : (
-                      <span className={styles.link}>{item.label}</span>
-                    )}
-                    {children.length > 0 ? (
-                      <ul className={styles.submenu}>
-                        {children.map((sub) => {
-                          const subHref = resolveHref(sub)
-                          if (!subHref) return null
-                          return (
-                            <li key={sub.id}>
-                              <a className={styles.subLink} href={subHref}>
-                                {sub.label}
-                              </a>
-                            </li>
-                          )
-                        })}
-                      </ul>
-                    ) : null}
-                  </li>
-                )
-              })}
-            </ul>
+          <nav className="nav-links" aria-label="Главное меню">
+            {items.map((item) => {
+              const href = resolveHref(item)
+              return href ? (
+                <a key={item.id} href={href}>
+                  {item.label}
+                </a>
+              ) : (
+                <span key={item.id}>{item.label}</span>
+              )
+            })}
           </nav>
         ) : null}
+
+        <div className="nav-r" />
       </div>
     </header>
   )

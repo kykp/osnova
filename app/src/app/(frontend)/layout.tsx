@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Cormorant, Inter } from 'next/font/google'
 import { getPayload } from 'payload'
 import React from 'react'
 
@@ -11,8 +11,16 @@ import './globals.css'
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-sans',
+  display: 'swap',
+})
+
+const cormorant = Cormorant({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-display',
   display: 'swap',
 })
 
@@ -50,7 +58,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       : null
 
   return (
-    <html lang="ru" className={inter.variable}>
+    <html lang="ru" className={`${inter.variable} ${cormorant.variable}`}>
       <body>
         <SiteHeader title={settings.siteTitle || ''} logo={logo} menu={menu} />
         {children}
