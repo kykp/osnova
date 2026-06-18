@@ -240,6 +240,25 @@ export interface Page {
         | {
             heading?: string | null;
             subheading?: string | null;
+            variant: 'horizontal' | 'vertical';
+            steps?:
+              | {
+                  title: string;
+                  description?: string | null;
+                  /**
+                   * Эмодзи или символ. Если не задана — показывается номер шага.
+                   */
+                  icon?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'process';
+          }
+        | {
+            heading?: string | null;
+            subheading?: string | null;
             variant: 'icons-grid' | 'cards-metric' | 'tabs';
             items?:
               | {
@@ -297,6 +316,25 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'stats';
+          }
+        | {
+            heading?: string | null;
+            variant: 'cards' | 'slider';
+            items?:
+              | {
+                  quote: string;
+                  author: string;
+                  /**
+                   * Например: «Директор», «Выпускница 2024», «Клиент с 2019 года».
+                   */
+                  role?: string | null;
+                  photo?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonials';
           }
         | {
             heading?: string | null;
@@ -359,6 +397,40 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'image';
+          }
+        | {
+            heading?: string | null;
+            provider: 'youtube' | 'rutube' | 'vk' | 'kinescope';
+            /**
+             * Полный адрес видео из браузерной строки. Например: https://www.youtube.com/watch?v=…, https://rutube.ru/video/…, https://vkvideo.ru/video-…, https://kinescope.io/…
+             */
+            url: string;
+            ratio?: ('16:9' | '4:3' | '1:1' | '9:16') | null;
+            caption?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'video';
+          }
+        | {
+            heading?: string | null;
+            /**
+             * Если включено — слайды меняются автоматически каждые 5 секунд. Останавливается при наведении мыши.
+             */
+            autoplay?: boolean | null;
+            slides?:
+              | {
+                  image: number | Media;
+                  caption?: string | null;
+                  /**
+                   * Если задана, весь слайд станет ссылкой.
+                   */
+                  url?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'slider';
           }
       )[]
     | null;
@@ -694,6 +766,23 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        process?:
+          | T
+          | {
+              heading?: T;
+              subheading?: T;
+              variant?: T;
+              steps?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         features?:
           | T
           | {
@@ -743,6 +832,23 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        testimonials?:
+          | T
+          | {
+              heading?: T;
+              variant?: T;
+              items?:
+                | T
+                | {
+                    quote?: T;
+                    author?: T;
+                    role?: T;
+                    photo?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         faq?:
           | T
           | {
@@ -785,6 +891,33 @@ export interface PagesSelect<T extends boolean = true> {
               image?: T;
               caption?: T;
               url?: T;
+              id?: T;
+              blockName?: T;
+            };
+        video?:
+          | T
+          | {
+              heading?: T;
+              provider?: T;
+              url?: T;
+              ratio?: T;
+              caption?: T;
+              id?: T;
+              blockName?: T;
+            };
+        slider?:
+          | T
+          | {
+              heading?: T;
+              autoplay?: T;
+              slides?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    url?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

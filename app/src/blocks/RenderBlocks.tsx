@@ -8,8 +8,12 @@ import { FAQ } from './FAQ/Component'
 import { Features } from './Features/Component'
 import { Hero } from './Hero/Component'
 import { ImageBlock } from './Image/Component'
+import { Process } from './Process/Component'
 import { RichText } from './RichText/Component'
+import { Slider } from './Slider/Component'
 import { Stats } from './Stats/Component'
+import { Testimonials } from './Testimonials/Component'
+import { Video } from './Video/Component'
 
 type Blocks = NonNullable<Page['layout']>
 
@@ -36,6 +40,14 @@ export function RenderBlocks({ blocks }: { blocks: Blocks | null | undefined }) 
             return <FAQ key={block.id} {...block} />
           case 'stats':
             return <Stats key={block.id} {...block} />
+          case 'process':
+            return <Process key={block.id} {...block} />
+          case 'testimonials':
+            return <Testimonials key={block.id} {...block} />
+          case 'video':
+            return <Video key={block.id} {...block} />
+          case 'slider':
+            return <Slider key={block.id} {...block} />
           default:
             return null
         }

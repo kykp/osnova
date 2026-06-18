@@ -7,8 +7,12 @@ import { FAQBlock } from '../blocks/FAQ/config'
 import { FeaturesBlock } from '../blocks/Features/config'
 import { HeroBlock } from '../blocks/Hero/config'
 import { ImageBlock } from '../blocks/Image/config'
+import { ProcessBlock } from '../blocks/Process/config'
 import { RichTextBlock } from '../blocks/RichText/config'
+import { SliderBlock } from '../blocks/Slider/config'
 import { StatsBlock } from '../blocks/Stats/config'
+import { TestimonialsBlock } from '../blocks/Testimonials/config'
+import { VideoBlock } from '../blocks/Video/config'
 import { slugify } from '../utils/slugify'
 
 export const Pages: CollectionConfig = {
@@ -60,13 +64,17 @@ export const Pages: CollectionConfig = {
               labels: { singular: 'Блок', plural: 'Блоки' },
               blocks: [
                 HeroBlock,
+                ProcessBlock,
                 FeaturesBlock,
                 CardsBlock,
                 StatsBlock,
+                TestimonialsBlock,
                 FAQBlock,
                 CTABlock,
                 RichTextBlock,
                 ImageBlock,
+                VideoBlock,
+                SliderBlock,
               ],
             },
           ],
