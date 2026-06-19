@@ -28,9 +28,21 @@ summary.qa-q::marker {
   filter: invert(1) brightness(1.4);
 }
 
-/* В blocks.css не задан размер для .dl .ic — без этого SVG растягивается
-   на 100% несуществующего размера .ic. Закрепляю 18×18. */
+/* В blocks.css не задан размер для нескольких .ic — без этого SVG
+   растягивается на 100% несуществующего размера .ic. */
 .doc .dl .ic {
+  width: 18px;
+  height: 18px;
+}
+.btn-text .ic {
+  width: 16px;
+  height: 16px;
+}
+.slide .cap .go .ic {
+  width: 20px;
+  height: 20px;
+}
+.cta-band .btn .ic {
   width: 18px;
   height: 18px;
 }
