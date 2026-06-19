@@ -73,6 +73,27 @@ summary.qa-q::marker {
   margin-inline: auto;
 }
 
+/* На мобильном футер стакается в одну колонку — центрируем всё. */
+@media (max-width: 767px) {
+  .footer-grid {
+    text-align: center;
+  }
+  .footer .brand {
+    justify-content: center;
+  }
+  .footer-about {
+    max-width: none;
+    margin-inline: auto;
+  }
+  .footer-bottom {
+    justify-content: center;
+    text-align: center;
+  }
+  .footer-bottom .sp {
+    margin-left: 0;
+  }
+}
+
 /* Контакты и форма — у дизайнера asymmetric grid (aside + content).
    Центрирую и ограничиваю максимальную ширину, чтобы блок жил в
    общем флоу страницы. */

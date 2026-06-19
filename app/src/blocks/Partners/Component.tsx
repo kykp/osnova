@@ -36,7 +36,13 @@ export function Partners({ heading, items }: PartnersProps) {
               <img
                 src={image.url}
                 alt={it.name || ''}
-                style={{ height: 70, width: 'auto', maxWidth: '85%', objectFit: 'contain' }}
+                style={{
+                  maxHeight: 70,
+                  maxWidth: '90%',
+                  width: 'auto',
+                  height: 'auto',
+                  objectFit: 'contain',
+                }}
                 loading="lazy"
               />
             )
