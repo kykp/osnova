@@ -73,26 +73,31 @@ summary.qa-q::marker {
   margin-inline: auto;
 }
 
-/* Partners: дизайнерский grid с фиксированным числом колонок (2 / 5)
-   создаёт «серый квадрат» на месте недостающих ячеек, потому что
-   .partners имеет background:var(--line) (тонкая сетка-разделитель).
-   Переключаю на flex с wrap+center — каждая ячейка отдельная плитка
-   с собственным фоном, пустых клеток быть не может. */
+/* Partners: trust-row подход — просто строка лого без коробок.
+   Дизайнерский grid с разделителями плохо живёт с динамическим числом
+   логотипов (пустые ячейки = серый квадрат), а коробки вокруг
+   wordmark'ов раздували блок. */
 .partners {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
+  align-items: center;
+  gap: 32px 48px;
   background: transparent;
   border: 0;
   border-radius: 0;
   overflow: visible;
 }
 .partner {
-  flex: 1 1 180px;
-  max-width: 240px;
-  border-radius: var(--r-sm);
-  border: 1px solid var(--border);
+  flex: 0 0 auto;
+  width: auto;
+  aspect-ratio: auto;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.partner:hover {
+  background: transparent;
 }
 
 /* На мобильном футер стакается в одну колонку — центрируем всё. */

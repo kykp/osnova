@@ -30,19 +30,16 @@ export function Partners({ heading, items }: PartnersProps) {
         )}
         <div className="partners reveal">
           {list.map((it, i) => {
-            const image = pickMediaSize(it.logo as Media, 'thumbnail')
-            if (!image) return null
+            const media = it.logo as Media
+            // Использую оригинальный URL, не thumbnail — thumbnails в Media
+            // обрезаются центром (fit:cover), wordmark теряет края.
+            const url = media?.url
+            if (!url) return null
             const inner = (
               <img
-                src={image.url}
+                src={url}
                 alt={it.name || ''}
-                style={{
-                  maxHeight: 70,
-                  maxWidth: '90%',
-                  width: 'auto',
-                  height: 'auto',
-                  objectFit: 'contain',
-                }}
+                style={{ height: 48, width: 'auto', maxWidth: '100%', objectFit: 'contain' }}
                 loading="lazy"
               />
             )
