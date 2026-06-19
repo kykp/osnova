@@ -46,6 +46,10 @@ summary.qa-q::marker {
   width: 18px;
   height: 18px;
 }
+.burger .ic {
+  width: 22px;
+  height: 22px;
+}
 
 /* Дизайнерское правило .section + .section{padding-top:0} «склеивает»
    соседние блоки. Возвращаю каждому блоку его полный верхний padding —
