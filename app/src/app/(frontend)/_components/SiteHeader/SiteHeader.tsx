@@ -2,6 +2,8 @@ import React from 'react'
 
 import type { MainMenu, Page } from '@/payload-types'
 
+import { ThemeToggle } from '../ThemeToggle/ThemeToggle'
+
 type MenuItem = NonNullable<MainMenu['items']>[number]
 type SubItem = NonNullable<MenuItem['children']>[number]
 
@@ -80,7 +82,9 @@ export function SiteHeader({
           </nav>
         ) : null}
 
-        <div className="nav-r" />
+        <div className="nav-r">
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   )
