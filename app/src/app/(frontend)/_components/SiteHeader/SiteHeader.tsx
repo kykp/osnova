@@ -66,7 +66,7 @@ export function SiteHeader({
               </svg>
             </span>
           )}
-          {title ? (
+          {!logo && title ? (
             <span>
               <b>{title}</b>
             </span>

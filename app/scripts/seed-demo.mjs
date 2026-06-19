@@ -129,8 +129,7 @@ async function teardown() {
       if (collection === 'pages') return d.slug === DEMO_PAGE_SLUG
       if (collection === 'news') return d.slug?.startsWith('demo-')
       if (collection === 'documents') return d.filename?.startsWith('demo-')
-      if (collection === 'staff') return d.lastName === 'Демо' || d.firstName === 'Демо' ||
-        ['Орлов', 'Соколова', 'Ястребов', 'Кречетова'].includes(d.lastName)
+      if (collection === 'staff') return true // удаляем всех staff: коробка демо, прода нет
       if (collection === 'form-submissions') return d.source === 'demo'
       return false
     }
@@ -514,12 +513,11 @@ async function setup() {
       blockType: 'features',
       heading: 'Почему клиенты выбирают Aerocharter',
       subheading: 'Не «возим самолётами» — выстраиваем перелёт под конкретную задачу.',
-      variant: 'icons-grid',
+      variant: 'cards-metric',
       items: [
-        { icon: '⚡', title: 'Скорость подачи', description: 'Борт готов к вылету через 2–3 часа после подтверждения, в любое время суток.' },
-        { icon: '🛡️', title: 'Своя служба безопасности', description: 'Полный SMS-аудит, страхование пассажиров и груза, медицинское сопровождение по запросу.' },
-        { icon: '🌐', title: 'География без границ', description: 'Полёты по СНГ, ЕС, Ближнему Востоку и Юго-Восточной Азии. Допуски на 60+ стран.' },
-        { icon: '🔒', title: 'Конфиденциальность', description: 'NDA по умолчанию, отдельные терминалы вылета, без публикации пассажирского списка.' },
+        { icon: '⚡', metric: '3 ч', title: 'От заявки до взлёта', description: 'Дежурные борты в Москве, Сочи и Санкт-Петербурге — поднимаем в воздух в день обращения.' },
+        { icon: '🌐', metric: '1800+', title: 'Аэропортов на карте', description: 'Включая малые площадки, недоступные регулярным рейсам. Ближе к конечной точке маршрута.' },
+        { icon: '🔒', metric: '0', title: 'Очередей и досмотров', description: 'Отдельный терминал бизнес-авиации. Регистрация — формальность на пару минут.' },
       ],
     },
     {
@@ -732,6 +730,24 @@ async function setup() {
         'Aerocharter — аренда бизнес-джетов и вертолётов. Подача борта в течение 3 часов, флот собственный, поддержка 24/7.',
       contactPhone: '+7 495 000-00-00',
       contactEmail: 'fly@aerocharter.demo',
+    },
+    overrideAccess: true,
+  })
+
+  /* 6. Меню сайта — якоря к ключевым блокам демо-страницы */
+  console.log('Updating MainMenu (anchor links)…')
+  await payload.updateGlobal({
+    slug: 'main-menu',
+    data: {
+      items: [
+        { label: 'Услуги', target: 'url', url: '#fleet' },
+        { label: 'Как летаем', target: 'url', url: '#process' },
+        { label: 'Команда', target: 'url', url: '#team' },
+        { label: 'Журнал', target: 'url', url: '#news' },
+        { label: 'Документы', target: 'url', url: '#docs' },
+        { label: 'Вопросы', target: 'url', url: '#faq' },
+        { label: 'Контакты', target: 'url', url: '#contacts' },
+      ],
     },
     overrideAccess: true,
   })

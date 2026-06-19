@@ -1,6 +1,12 @@
 @import './styles/design-system.css';
 @import './styles/blocks.css';
 
+/* Sticky-шапка ~72px высотой. При клике на якорь смещаем посадку
+   секции, чтобы заголовок не уехал под шапку. */
+html {
+  scroll-padding-top: 100px;
+}
+
 /* ───── React-integration overrides ─────
    Дизайнер использовал кастомный JS-аккордеон (<div class="qa">+<button>);
    мы используем нативный <details>/<summary> — снимаем браузерную иконку
