@@ -107,8 +107,8 @@ export async function Contacts({
     <section className="section" id="contacts">
       <div className="container">
         {heading && (
-          <div className="section-head reveal">
-            <span className="eyebrow">Контакты</span>
+          <div className="section-head center reveal">
+            <span className="eyebrow center">Контакты</span>
             <h2>{heading}</h2>
           </div>
         )}

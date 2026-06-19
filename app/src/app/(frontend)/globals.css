@@ -47,6 +47,26 @@ summary.qa-q::marker {
   height: 18px;
 }
 
+/* Дизайнерское правило .section + .section{padding-top:0} «склеивает»
+   соседние блоки. Возвращаю каждому блоку его полный верхний padding —
+   так контент дышит, и переходы между «alt» / не-alt тонами читаются. */
+.section + .section {
+  padding-top: var(--section-y);
+}
+
+/* Drop-cap на первой букве первого параграфа в .rich.
+   Дизайнер делал через явный class="drop", у нас Lexical не таскает
+   классы — применяем стиль автоматически. */
+.rich > p:first-of-type::first-letter {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 600;
+  float: left;
+  line-height: 0.78;
+  padding: 6px 14px 0 0;
+  color: var(--accent-ink);
+}
+
 /* .meta-строки внутри .info должны идти каждой на своей строке,
    а заголовок — отдельным блоком (designer-HTML использовал inline
    style="display:block", у нас обходимся через CSS). */

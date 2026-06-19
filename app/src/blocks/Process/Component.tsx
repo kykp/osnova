@@ -22,8 +22,8 @@ export function Process({ heading, subheading, steps }: ProcessProps) {
     <section className="section" id="process">
       <div className="container">
         {(heading || subheading) && (
-          <div className="section-head reveal">
-            <span className="eyebrow">Этапы</span>
+          <div className="section-head center reveal">
+            <span className="eyebrow center">Этапы</span>
             {heading && <h2>{heading}</h2>}
             {subheading && <p className="sub">{subheading}</p>}
           </div>

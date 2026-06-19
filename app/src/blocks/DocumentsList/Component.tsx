@@ -62,8 +62,8 @@ export async function DocumentsList({ heading, limit }: DocumentsListProps) {
     <section className="section alt" id="docs">
       <div className="container">
         {heading && (
-          <div className="section-head reveal">
-            <span className="eyebrow">Документы</span>
+          <div className="section-head center reveal">
+            <span className="eyebrow center">Документы</span>
             <h2>{heading}</h2>
           </div>
         )}

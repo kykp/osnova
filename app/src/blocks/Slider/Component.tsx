@@ -63,13 +63,22 @@ export function Slider({ heading, autoplay, slides }: SliderProps) {
     }
   }, [autoplay, list.length])
 
+  const prevIdx = useRef(0)
   useEffect(() => {
     const el = slidesRef.current
     if (!el) return
     const slide = el.children[idx] as HTMLElement | undefined
     if (slide) {
-      el.scrollTo({ left: slide.offsetLeft - el.offsetLeft, behavior: 'smooth' })
+      // На wrap'е (последний → первый или наоборот) smooth-скролл
+      // конфликтует с scroll-snap mandatory — слайдер «буксует» и
+      // снапается к промежуточной картинке. Делаем мгновенный прыжок.
+      const isWrap = Math.abs(idx - prevIdx.current) > 1
+      el.scrollTo({
+        left: slide.offsetLeft - el.offsetLeft,
+        behavior: isWrap ? 'auto' : 'smooth',
+      })
     }
+    prevIdx.current = idx
   }, [idx])
 
   if (list.length === 0) return null

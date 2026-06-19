@@ -68,8 +68,8 @@ export function Testimonials({ heading, variant, items }: TestimonialsProps) {
     <section className="section alt" id="reviews">
       <div className="container">
         {heading && (
-          <div className="section-head reveal">
-            <span className="eyebrow">Отзывы</span>
+          <div className="section-head center reveal">
+            <span className="eyebrow center">Отзывы</span>
             <h2>{heading}</h2>
           </div>
         )}

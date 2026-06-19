@@ -51,17 +51,9 @@ export async function NewsList({ heading, limit, allLinkLabel, allLinkUrl }: New
   return (
     <section className="section" id="news">
       <div className="container">
-        <div className="section-head row reveal">
-          <div>
-            <span className="eyebrow">Журнал</span>
-            {heading && <h2>{heading}</h2>}
-          </div>
-          {allLinkUrl && allLinkLabel && (
-            <a className="btn-text" href={allLinkUrl}>
-              {allLinkLabel}
-              <ArrowIcon />
-            </a>
-          )}
+        <div className="section-head center reveal">
+          <span className="eyebrow center">Журнал</span>
+          {heading && <h2>{heading}</h2>}
         </div>
         <div className="news reveal">
           {items.map((n) => {
@@ -93,6 +85,17 @@ export async function NewsList({ heading, limit, allLinkLabel, allLinkUrl }: New
             )
           })}
         </div>
+        {allLinkUrl && allLinkLabel && (
+          <div
+            className="reveal"
+            style={{ display: 'flex', justifyContent: 'center', marginTop: 48 }}
+          >
+            <a className="btn btn-ghost btn-lg" href={allLinkUrl}>
+              {allLinkLabel}
+              <ArrowIcon />
+            </a>
+          </div>
+        )}
       </div>
     </section>
   )

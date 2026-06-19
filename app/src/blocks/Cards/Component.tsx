@@ -27,8 +27,8 @@ export function Cards({ heading, items }: CardsBlockProps) {
     <section className="section" id="fleet">
       <div className="container">
         {heading && (
-          <div className="section-head reveal">
-            <span className="eyebrow">Услуги</span>
+          <div className="section-head center reveal">
+            <span className="eyebrow center">Услуги</span>
             <h2>{heading}</h2>
           </div>
         )}

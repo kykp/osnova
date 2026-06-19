@@ -34,6 +34,19 @@ async function fetchAvatar(id, size = 480) {
   return fetchBytes(url)
 }
 
+async function aerocharterLogoPng() {
+  // Логотип со стилизованным самолётом + текст «Aerocharter»
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 140">
+    <g transform="translate(20, 30)" fill="none" stroke="#0a0a0b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M88 64v-8L52 36V19a6 6 0 0 0-12 0v17L4 56v8l36-10v22l-9 6v6l15-4 15 4v-6l-9-6V54z" />
+    </g>
+    <text x="120" y="92"
+          font-family="-apple-system,BlinkMacSystemFont,'Inter',Arial,sans-serif"
+          font-size="58" font-weight="800" fill="#0a0a0b" letter-spacing="-1.2">Aerocharter</text>
+  </svg>`
+  return sharp(Buffer.from(svg)).png().toBuffer()
+}
+
 async function wordmarkPng(name) {
   const w = 480
   const h = 160
@@ -262,6 +275,15 @@ async function setup() {
     'Ночная взлётная полоса',
   )
 
+  /* 1b. Brand: logo + siteTitle в Settings */
+  console.log('Updating brand…')
+  const brandLogo = await uploadImage(
+    'demo-brand-aerocharter.png',
+    await aerocharterLogoPng(),
+    'Aerocharter — логотип',
+    'image/png',
+  )
+
   /* 2. Staff */
   console.log('Creating staff…')
   await payload.create({
@@ -399,6 +421,72 @@ async function setup() {
         },
       ],
       direction: 'ltr',
+    },
+  })
+
+  const txt = (text, format = 0) => ({
+    type: 'text',
+    detail: 0,
+    format,
+    mode: 'normal',
+    style: '',
+    text,
+    version: 1,
+  })
+  const para = (text) => ({
+    type: 'paragraph',
+    format: '',
+    indent: 0,
+    version: 1,
+    direction: 'ltr',
+    textFormat: 0,
+    children: [txt(text)],
+  })
+  const head = (tag, text) => ({
+    type: 'heading',
+    tag,
+    format: '',
+    indent: 0,
+    version: 1,
+    direction: 'ltr',
+    children: [txt(text)],
+  })
+  const li = (text, value) => ({
+    type: 'listitem',
+    value,
+    format: '',
+    indent: 0,
+    version: 1,
+    direction: 'ltr',
+    children: [txt(text)],
+  })
+  const ul = (...items) => ({
+    type: 'list',
+    listType: 'bullet',
+    tag: 'ul',
+    start: 1,
+    format: '',
+    indent: 0,
+    version: 1,
+    direction: 'ltr',
+    children: items.map((t, i) => li(t, i + 1)),
+  })
+  const quote = (text) => ({
+    type: 'quote',
+    format: '',
+    indent: 0,
+    version: 1,
+    direction: 'ltr',
+    children: [txt(text)],
+  })
+  const richArticle = (nodes) => ({
+    root: {
+      type: 'root',
+      format: '',
+      indent: 0,
+      version: 1,
+      direction: 'ltr',
+      children: nodes,
     },
   })
 
@@ -566,9 +654,28 @@ async function setup() {
     },
     {
       blockType: 'richText',
-      content: lex(
-        'Aerocharter работает на рынке частной авиации с 2011 года. Лицензия эксплуатанта АП-256, страховые партнёры — «АльфаСтрахование» и Lloyd’s. Все воздушные суда находятся в собственности компании, экипажи — штатные сотрудники с регулярными допусками.',
-      ),
+      content: richArticle([
+        head('h2', 'Небо как продолжение офиса'),
+        para(
+          'Aerocharter начинался в 2011 году с одного борта и простой идеи: деловому человеку важнее всего время. С тех пор мы выполнили более двенадцати тысяч рейсов и научились собирать сложную логистику так, чтобы клиент видел только результат — поданный вовремя трап.',
+        ),
+        head('h3', 'Как мы работаем'),
+        para(
+          'За каждым клиентом закреплён личный диспетчер. Он знает ваши предпочтения, держит связь до посадки и решает вопросы, о которых вы можете даже не узнать: слоты, разрешения, погодные альтернативы.',
+        ),
+        ul(
+          'Собственный сертификат эксплуатанта — без посредников между вами и бортом',
+          'Прозрачное ценообразование: смета совпадает с договором',
+          'Дежурные борты в трёх городах и доступ к мировому флоту партнёров',
+        ),
+        quote(
+          'Мы продаём не километры, а уверенность в том, что вы будете там, где нужно, точно в срок.',
+        ),
+        head('h4', 'Безопасность прежде всего'),
+        para(
+          'Каждый рейс проходит двойной контроль готовности, а пилоты регулярно подтверждают допуски на тренажёрах. Подробности — в разделе документов.',
+        ),
+      ]),
     },
     {
       blockType: 'contacts',
@@ -617,7 +724,15 @@ async function setup() {
 
   await payload.updateGlobal({
     slug: 'settings',
-    data: { homePage: page.id },
+    data: {
+      homePage: page.id,
+      logo: brandLogo.id,
+      siteTitle: 'Aerocharter',
+      siteDescription:
+        'Aerocharter — аренда бизнес-джетов и вертолётов. Подача борта в течение 3 часов, флот собственный, поддержка 24/7.',
+      contactPhone: '+7 495 000-00-00',
+      contactEmail: 'fly@aerocharter.demo',
+    },
     overrideAccess: true,
   })
 
