@@ -7,6 +7,51 @@ html {
   scroll-padding-top: 100px;
 }
 
+/* «Наверх» — FAB на мобильном, fade-in после 800px скролла. */
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--sh-md);
+  cursor: pointer;
+  z-index: 55;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--t-base, 200ms) var(--ease-out),
+    transform var(--t-base, 200ms) var(--ease-out),
+    background var(--t-fast, 150ms);
+  pointer-events: none;
+}
+.back-to-top .ic {
+  width: 20px;
+  height: 20px;
+}
+.back-to-top:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.back-to-top-on {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+@media (max-width: 768px) {
+  .back-to-top {
+    display: inline-flex;
+  }
+}
+
 /* ───── React-integration overrides ─────
    Дизайнер использовал кастомный JS-аккордеон (<div class="qa">+<button>);
    мы используем нативный <details>/<summary> — снимаем браузерную иконку

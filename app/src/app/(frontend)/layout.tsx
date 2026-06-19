@@ -5,6 +5,7 @@ import React from 'react'
 
 import config from '@/payload.config'
 
+import { BackToTop } from './_components/BackToTop/BackToTop'
 import { RevealOnScroll } from './_components/RevealOnScroll/RevealOnScroll'
 import { SiteFooter } from './_components/SiteFooter/SiteFooter'
 import { SiteHeader, type SiteHeaderLogo } from './_components/SiteHeader/SiteHeader'
@@ -66,6 +67,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <main id="top">{children}</main>
         <SiteFooter settings={settings} menu={menu} />
         <RevealOnScroll />
+        <BackToTop />
       </body>
     </html>
   )
