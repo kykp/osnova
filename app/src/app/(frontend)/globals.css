@@ -21,3 +21,30 @@ summary.qa-q::marker {
 .qa[open] .qa-q .pm .ic svg {
   transform: rotate(45deg);
 }
+
+/* В тёмной теме инвертируем монохромные логотипы партнёров (raster PNG
+   на прозрачном фоне) — иначе чёрный текст сливается с тёмным фоном. */
+[data-theme='dark'] .partner img {
+  filter: invert(1) brightness(1.4);
+}
+
+/* В blocks.css не задан размер для .dl .ic — без этого SVG растягивается
+   на 100% несуществующего размера .ic. Закрепляю 18×18. */
+.doc .dl .ic {
+  width: 18px;
+  height: 18px;
+}
+
+/* .meta-строки внутри .info должны идти каждой на своей строке,
+   а заголовок — отдельным блоком (designer-HTML использовал inline
+   style="display:block", у нас обходимся через CSS). */
+.doc .info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.doc .info h3,
+.doc .info .doc-h {
+  display: block;
+}

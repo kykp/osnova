@@ -76,17 +76,7 @@ export async function DocumentsList({ heading, limit }: DocumentsListProps) {
               <a key={d.id} className="doc" href={d.url || '#'} download={d.filename || true}>
                 <span className="fmt">{extFromFilename(d.filename)}</span>
                 <span className="info">
-                  <span className="doc-h">
-                    <b
-                      style={{
-                        fontSize: '15.5px',
-                        color: 'var(--ink)',
-                        fontWeight: 600,
-                      }}
-                    >
-                      {d.title}
-                    </b>
-                  </span>
+                  <h3>{d.title}</h3>
                   {d.description && <span className="meta">{d.description}</span>}
                   {meta && <span className="meta">{meta}</span>}
                 </span>

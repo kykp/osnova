@@ -50,19 +50,18 @@ const ArrowRight = () => (
 export function Slider({ heading, autoplay, slides }: SliderProps) {
   const list = (slides ?? []).filter((s) => typeof s.image === 'object')
   const [idx, setIdx] = useState(0)
-  const [playing, setPlaying] = useState(Boolean(autoplay))
   const slidesRef = useRef<HTMLDivElement>(null)
   const timer = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
-    if (!playing || list.length < 2) return
+    if (!autoplay || list.length < 2) return
     timer.current = setInterval(() => {
       setIdx((p) => (p + 1) % list.length)
     }, 5000)
     return () => {
       if (timer.current) clearInterval(timer.current)
     }
-  }, [playing, list.length])
+  }, [autoplay, list.length])
 
   useEffect(() => {
     const el = slidesRef.current
@@ -157,18 +156,6 @@ export function Slider({ heading, autoplay, slides }: SliderProps) {
                     aria-label={`Слайд ${i + 1}`}
                   />
                 ))}
-              </div>
-              <div
-                className={`autoplay${playing ? '' : ' off'}`}
-                role="button"
-                tabIndex={0}
-                onClick={() => setPlaying((p) => !p)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') setPlaying((p) => !p)
-                }}
-              >
-                <span>Автопрокрутка</span>
-                <span className="sw" />
               </div>
             </div>
           )}
