@@ -6,6 +6,7 @@ import React from 'react'
 import config from '@/payload.config'
 
 import { RevealOnScroll } from './_components/RevealOnScroll/RevealOnScroll'
+import { SiteFooter } from './_components/SiteFooter/SiteFooter'
 import { SiteHeader, type SiteHeaderLogo } from './_components/SiteHeader/SiteHeader'
 
 import './globals.css'
@@ -62,7 +63,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="ru" className={`${inter.variable} ${cormorant.variable}`}>
       <body>
         <SiteHeader title={settings.siteTitle || ''} logo={logo} menu={menu} />
-        {children}
+        <main id="top">{children}</main>
+        <SiteFooter settings={settings} menu={menu} />
         <RevealOnScroll />
       </body>
     </html>

@@ -2,6 +2,7 @@ import React from 'react'
 
 import type { MainMenu, Page } from '@/payload-types'
 
+import { MobileMenu, type MobileMenuItem } from '../MobileMenu/MobileMenu'
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle'
 
 type MenuItem = NonNullable<MainMenu['items']>[number]
@@ -33,6 +34,11 @@ export function SiteHeader({
   menu: MainMenu | null
 }) {
   const items = menu?.items ?? []
+
+  const mobileItems: MobileMenuItem[] = items.map((item) => ({
+    label: item.label,
+    href: resolveHref(item),
+  }))
 
   return (
     <header className="nav">
@@ -84,6 +90,7 @@ export function SiteHeader({
 
         <div className="nav-r">
           <ThemeToggle />
+          {mobileItems.length > 0 && <MobileMenu items={mobileItems} />}
         </div>
       </div>
     </header>
