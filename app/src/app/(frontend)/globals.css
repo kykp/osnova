@@ -54,6 +54,67 @@ summary.qa-q::marker {
   padding-top: var(--section-y);
 }
 
+/* Все «карточечные» блоки центрируются. Дизайнер сделал их
+   left-aligned, но в общем флоу секций (где section-head — center)
+   контент карточек выпадает. Возвращаем единый ритм. */
+
+/* Process — иконка/номер сверху, заголовок и описание по центру */
+.step {
+  text-align: center;
+  padding-right: 0;
+}
+.step .node {
+  justify-content: center;
+  margin-bottom: 18px;
+}
+.step .line {
+  display: none;
+}
+.step p {
+  max-width: 280px;
+  margin-inline: auto;
+}
+
+/* Features (.feat) — иконка сверху по центру, текст по центру */
+.feat {
+  text-align: center;
+}
+.feat .ic-wrap {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Cards (.tile) — описание под картинкой по центру */
+.tile .body {
+  text-align: center;
+  align-items: center;
+}
+.tile .more {
+  margin-inline: auto;
+}
+
+/* Testimonials (.quote) — звёзды, цитата, автор — всё по центру */
+.quote {
+  text-align: center;
+  align-items: center;
+}
+.quote .stars {
+  justify-content: center;
+}
+.quote .by {
+  justify-content: center;
+}
+
+/* NewsList — текст карточки по центру */
+.post .body {
+  text-align: center;
+}
+
+/* Team — текст под фото по центру */
+.member {
+  text-align: center;
+}
+
 /* Drop-cap на первой букве первого параграфа в .rich.
    Дизайнер делал через явный class="drop", у нас Lexical не таскает
    классы — применяем стиль автоматически. */
