@@ -1,0 +1,17 @@
+// Превью загруженного файла в Upload-полях (Settings → Брендирование и т.п.):
+// по умолчанию Payload рендерит квадрат 80×80 с object-fit: cover, поэтому широкие
+// логотипы/баннеры обрезаются по бокам. Растягиваем контейнер по ширине картинки
+// (с потолком), а саму картинку показываем целиком через object-fit: contain.
+.upload-relationship-details__thumbnail .thumbnail:not(.thumbnail--size-none) {
+  width: auto;
+  max-width: 240px;
+
+  img,
+  svg {
+    width: auto;
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: left center;
+  }
+}

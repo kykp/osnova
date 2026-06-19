@@ -51,6 +51,37 @@ summary.qa-q::marker {
   height: 22px;
 }
 
+/* Блоки, у которых дизайнер задавал жёсткую сетку с фиксированным
+   числом колонок (.quotes — 3, .tiles — 4) — при числе карточек
+   меньше количества колонок остаются пустые ячейки и блок «выпадает»
+   влево. Переключаю на flex с центрированием. */
+.quotes,
+.tiles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.quote {
+  flex: 0 1 360px;
+}
+.tile {
+  flex: 0 1 280px;
+}
+.docs {
+  max-width: 820px;
+  margin-inline: auto;
+}
+
+/* Контакты и форма — у дизайнера asymmetric grid (aside + content).
+   Центрирую и ограничиваю максимальную ширину, чтобы блок жил в
+   общем флоу страницы. */
+.contact,
+.form-wrap {
+  max-width: 980px;
+  margin-inline: auto;
+}
+
 /* Дизайнерское правило .section + .section{padding-top:0} «склеивает»
    соседние блоки. Возвращаю каждому блоку его полный верхний padding —
    так контент дышит, и переходы между «alt» / не-alt тонами читаются. */

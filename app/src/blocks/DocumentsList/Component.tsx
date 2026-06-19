@@ -67,7 +67,7 @@ export async function DocumentsList({ heading, limit }: DocumentsListProps) {
             <h2>{heading}</h2>
           </div>
         )}
-        <div className="docs reveal" style={{ maxWidth: 820 }}>
+        <div className="docs reveal" style={{ maxWidth: 820, marginInline: 'auto' }}>
           {docs.map((d) => {
             const sizeStr = formatBytes(d.filesize)
             const dateStr = formatDate(d.publishedAt)
