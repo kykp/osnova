@@ -3,8 +3,6 @@ import React from 'react'
 import type { Media, Page } from '@/payload-types'
 import { pickMediaSize } from '@/utils/mediaSize'
 
-import styles from './Component.module.css'
-
 type ImageBlockProps = Extract<NonNullable<Page['layout']>[number], { blockType: 'image' }>
 
 export function ImageBlock({ image, caption, url }: ImageBlockProps) {
@@ -12,29 +10,32 @@ export function ImageBlock({ image, caption, url }: ImageBlockProps) {
   const picture = pickMediaSize(media, 'feature')
   if (!picture) return null
 
-  const img = (
-    <img
-      className={styles.image}
-      src={picture.url}
-      alt={media?.alt ?? ''}
-      width={picture.width}
-      height={picture.height}
-      loading="lazy"
+  const inner = (
+    <div
+      className="pic"
+      style={{
+        backgroundImage: `url(${picture.url})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+      role="img"
+      aria-label={media?.alt ?? ''}
     />
   )
 
   return (
-    <section className={styles.root}>
-      <figure className={styles.figure}>
-        {url ? (
-          <a className={styles.link} href={url}>
-            {img}
-          </a>
-        ) : (
-          img
-        )}
-        {caption ? <figcaption className={styles.caption}>{caption}</figcaption> : null}
-      </figure>
+    <section className="section tight alt">
+      <div className="container">
+        <figure className="figure reveal">
+          {url ? <a href={url}>{inner}</a> : inner}
+          {caption && (
+            <figcaption>
+              <span className="bar" />
+              <span>{caption}</span>
+            </figcaption>
+          )}
+        </figure>
+      </div>
     </section>
   )
 }

@@ -1,7 +1,5 @@
 import React from 'react'
 
-import styles from './Component.module.css'
-
 type Step = {
   id?: string | null
   title: string
@@ -16,29 +14,35 @@ type ProcessProps = {
   steps?: Step[] | null
 }
 
-export function Process({ heading, subheading, variant, steps }: ProcessProps) {
+export function Process({ heading, subheading, steps }: ProcessProps) {
   const list = steps ?? []
   if (list.length === 0) return null
 
   return (
-    <section className={styles.root}>
-      {(heading || subheading) && (
-        <header className={styles.header}>
-          {heading && <h2 className={styles.heading}>{heading}</h2>}
-          {subheading && <p className={styles.subheading}>{subheading}</p>}
-        </header>
-      )}
-      <ol className={variant === 'vertical' ? styles.vertical : styles.horizontal}>
-        {list.map((s, i) => (
-          <li key={s.id ?? i} className={styles.step}>
-            <div className={styles.badge}>{s.icon || i + 1}</div>
-            <div className={styles.stepBody}>
-              <h3 className={styles.stepTitle}>{s.title}</h3>
-              {s.description && <p className={styles.stepDesc}>{s.description}</p>}
+    <section className="section" id="process">
+      <div className="container">
+        {(heading || subheading) && (
+          <div className="section-head reveal">
+            <span className="eyebrow">Этапы</span>
+            {heading && <h2>{heading}</h2>}
+            {subheading && <p className="sub">{subheading}</p>}
+          </div>
+        )}
+        <div className="steps reveal">
+          {list.map((s, i) => (
+            <div key={s.id ?? i} className="step">
+              <div className="node">
+                <span className="num">
+                  {s.icon ? <span style={{ fontSize: 22 }}>{s.icon}</span> : <span>{i + 1}</span>}
+                </span>
+                {i < list.length - 1 && <span className="line" />}
+              </div>
+              <h3>{s.title}</h3>
+              {s.description && <p>{s.description}</p>}
             </div>
-          </li>
-        ))}
-      </ol>
+          ))}
+        </div>
+      </div>
     </section>
   )
 }

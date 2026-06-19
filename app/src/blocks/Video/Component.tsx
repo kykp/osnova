@@ -1,7 +1,5 @@
 import React from 'react'
 
-import styles from './Component.module.css'
-
 type VideoProps = {
   heading?: string | null
   provider: 'youtube' | 'rutube' | 'vk' | 'kinescope'
@@ -40,35 +38,68 @@ function toEmbedUrl(provider: VideoProps['provider'], url: string): string | nul
   return null
 }
 
+function ratioPadding(ratio: VideoProps['ratio']): string {
+  switch (ratio) {
+    case '4:3':
+      return '75%'
+    case '1:1':
+      return '100%'
+    case '9:16':
+      return '177.78%'
+    case '16:9':
+    default:
+      return '56.25%'
+  }
+}
+
+function providerLabel(provider: VideoProps['provider']): string {
+  return (
+    {
+      youtube: 'YouTube',
+      rutube: 'Rutube',
+      vk: 'VK Видео',
+      kinescope: 'Kinescope',
+    }[provider] || 'Видео'
+  )
+}
+
 export function Video({ heading, provider, url, ratio, caption }: VideoProps) {
   const embed = toEmbedUrl(provider, url)
   if (!embed) return null
 
-  const ratioClass =
-    ratio === '4:3'
-      ? styles.ratio43
-      : ratio === '1:1'
-        ? styles.ratio11
-        : ratio === '9:16'
-          ? styles.ratio916
-          : styles.ratio169
-
   return (
-    <section className={styles.root}>
-      {heading && <h2 className={styles.heading}>{heading}</h2>}
-      <figure className={styles.frame}>
-        <div className={ratioClass}>
-          <iframe
-            className={styles.iframe}
-            src={embed}
-            title={caption || heading || 'Видео'}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-            allowFullScreen
-            loading="lazy"
-          />
-        </div>
-        {caption && <figcaption className={styles.caption}>{caption}</figcaption>}
-      </figure>
+    <section className="section" id="video">
+      <div className="container">
+        {heading && (
+          <div className="section-head center reveal">
+            <span className="eyebrow center">Видео</span>
+            <h2>{heading}</h2>
+          </div>
+        )}
+        <figure className="video reveal">
+          <div
+            className="player"
+            style={{
+              aspectRatio: 'auto',
+              height: 0,
+              paddingBottom: ratioPadding(ratio),
+              maxWidth: ratio === '9:16' ? 480 : undefined,
+              marginInline: 'auto',
+            }}
+          >
+            <span className="provider">{providerLabel(provider)} · {ratio || '16:9'}</span>
+            <iframe
+              src={embed}
+              title={caption || heading || 'Видео'}
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+              allowFullScreen
+              loading="lazy"
+            />
+          </div>
+          {caption && <figcaption>{caption}</figcaption>}
+        </figure>
+      </div>
     </section>
   )
 }

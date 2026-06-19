@@ -1,2 +1,23 @@
 @import './styles/design-system.css';
 @import './styles/blocks.css';
+
+/* ───── React-integration overrides ─────
+   Дизайнер использовал кастомный JS-аккордеон (<div class="qa">+<button>);
+   мы используем нативный <details>/<summary> — снимаем браузерную иконку
+   развёртывания, остальное стилизуется через designer-CSS как было.
+*/
+summary.qa-q {
+  list-style: none;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  width: 100%;
+}
+summary.qa-q::-webkit-details-marker,
+summary.qa-q::marker {
+  display: none;
+  content: '';
+}
+.qa[open] .qa-q .pm .ic svg {
+  transform: rotate(45deg);
+}

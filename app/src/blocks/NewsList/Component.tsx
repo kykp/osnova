@@ -5,14 +5,26 @@ import type { Media, News as NewsItem } from '@/payload-types'
 import config from '@/payload.config'
 import { pickMediaSize } from '@/utils/mediaSize'
 
-import styles from './Component.module.css'
-
 type NewsListProps = {
   heading?: string | null
   limit?: number | null
   allLinkLabel?: string | null
   allLinkUrl?: string | null
 }
+
+const ArrowIcon = () => (
+  <span className="ic">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.9"
+      strokeLinecap="round"
+    >
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  </span>
+)
 
 function formatDate(iso: string | null | undefined): string {
   if (!iso) return ''
@@ -37,35 +49,51 @@ export async function NewsList({ heading, limit, allLinkLabel, allLinkUrl }: New
   if (items.length === 0) return null
 
   return (
-    <section className={styles.root}>
-      <header className={styles.header}>
-        {heading && <h2 className={styles.heading}>{heading}</h2>}
-        {allLinkUrl && allLinkLabel && (
-          <a href={allLinkUrl} className={styles.allLink}>
-            {allLinkLabel}
-          </a>
-        )}
-      </header>
-      <ul className={styles.grid}>
-        {items.map((n) => {
-          const cover =
-            n.cover && typeof n.cover === 'object'
-              ? pickMediaSize(n.cover as Media, 'card')
-              : null
-          return (
-            <li key={n.id} className={styles.card}>
-              <a className={styles.link} href={`/news/${n.slug}`}>
-                {cover && <img src={cover.url} alt={n.title} className={styles.cover} />}
-                <div className={styles.body}>
-                  {n.publishedAt && <div className={styles.date}>{formatDate(n.publishedAt)}</div>}
-                  <h3 className={styles.title}>{n.title}</h3>
-                  {n.excerpt && <p className={styles.excerpt}>{n.excerpt}</p>}
+    <section className="section" id="news">
+      <div className="container">
+        <div className="section-head row reveal">
+          <div>
+            <span className="eyebrow">Журнал</span>
+            {heading && <h2>{heading}</h2>}
+          </div>
+          {allLinkUrl && allLinkLabel && (
+            <a className="btn-text" href={allLinkUrl}>
+              {allLinkLabel}
+              <ArrowIcon />
+            </a>
+          )}
+        </div>
+        <div className="news reveal">
+          {items.map((n) => {
+            const cover =
+              n.cover && typeof n.cover === 'object'
+                ? pickMediaSize(n.cover as Media, 'card')
+                : null
+            return (
+              <a key={n.id} className="post" href={`/news/${n.slug}`}>
+                <div
+                  className="cover"
+                  style={
+                    cover
+                      ? {
+                          backgroundImage: `url(${cover.url})`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                        }
+                      : { background: 'var(--accent-soft)' }
+                  }
+                  aria-label={n.title}
+                />
+                <div className="body">
+                  {n.publishedAt && <div className="date">{formatDate(n.publishedAt)}</div>}
+                  <h3>{n.title}</h3>
+                  {n.excerpt && <p>{n.excerpt}</p>}
                 </div>
               </a>
-            </li>
-          )
-        })}
-      </ul>
+            )
+          })}
+        </div>
+      </div>
     </section>
   )
 }

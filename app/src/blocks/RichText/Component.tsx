@@ -3,15 +3,15 @@ import React from 'react'
 
 import type { Page } from '@/payload-types'
 
-import styles from './Component.module.css'
-
 type RichTextProps = Extract<NonNullable<Page['layout']>[number], { blockType: 'richText' }>
 
 export function RichText({ content }: RichTextProps) {
   return (
-    <section className={styles.root}>
-      <div className={styles.inner}>
-        <PayloadRichText data={content} />
+    <section className="section" id="about">
+      <div className="container">
+        <article className="rich reveal">
+          <PayloadRichText data={content} />
+        </article>
       </div>
     </section>
   )
