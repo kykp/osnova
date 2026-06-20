@@ -1,6 +1,5 @@
 import type { Block } from 'payload'
 
-import { blockAdmin } from '../_shared/blockAdmin'
 import { enabledField } from '../_shared/enabledField'
 
 export const ContactsBlock: Block = {
@@ -9,7 +8,6 @@ export const ContactsBlock: Block = {
     singular: 'Целевое действие — Контакты',
     plural: 'Целевое действие — Контакты',
   },
-  admin: blockAdmin('Целевое действие — Контакты'),
   imageURL: '/block-previews/contacts.svg',
   imageAltText: 'Превью: контактная информация слева и карта справа',
   fields: [

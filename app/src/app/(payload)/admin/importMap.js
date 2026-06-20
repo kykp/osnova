@@ -1,4 +1,3 @@
-import { BlockRowLabel as BlockRowLabel_c33568786e762cc6dba8ba6dac1b777b } from '@/blocks/_shared/BlockRowLabel'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -22,6 +21,7 @@ import { StrikethroughFeatureClient as StrikethroughFeatureClient_e70f5e05f09f93
 import { UnderlineFeatureClient as UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
+import { BlockVisibilityMenu as BlockVisibilityMenu_69c9441e6b282e6e002e9b1065290e83 } from '@/components/BlockVisibilityMenu/BlockVisibilityMenu'
 import { Icon as Icon_edec53feed79ac3b71c9711169ea8044 } from '@/components/AdminBranding/Icon'
 import { Logo as Logo_82abef67c9cd33f1bb5a8d16e18f6a14 } from '@/components/AdminBranding/Logo'
 import { BackupLink as BackupLink_76883d2edb8c305d3db2f8b145558591 } from '@/components/BackupLink/BackupLink'
@@ -29,7 +29,6 @@ import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } f
 
 /** @type import('payload').ImportMap */
 export const importMap = {
-  "@/blocks/_shared/BlockRowLabel#BlockRowLabel": BlockRowLabel_c33568786e762cc6dba8ba6dac1b777b,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -53,6 +52,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#UnderlineFeatureClient": UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#BoldFeatureClient": BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
+  "@/components/BlockVisibilityMenu/BlockVisibilityMenu#BlockVisibilityMenu": BlockVisibilityMenu_69c9441e6b282e6e002e9b1065290e83,
   "@/components/AdminBranding/Icon#Icon": Icon_edec53feed79ac3b71c9711169ea8044,
   "@/components/AdminBranding/Logo#Logo": Logo_82abef67c9cd33f1bb5a8d16e18f6a14,
   "@/components/BackupLink/BackupLink#BackupLink": BackupLink_76883d2edb8c305d3db2f8b145558591,

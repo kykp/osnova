@@ -1,6 +1,5 @@
 import type { Block } from 'payload'
 
-import { blockAdmin } from '../_shared/blockAdmin'
 import { enabledField } from '../_shared/enabledField'
 
 export const VideoBlock: Block = {
@@ -9,7 +8,6 @@ export const VideoBlock: Block = {
     singular: 'Контент — Видео',
     plural: 'Контент — Видео',
   },
-  admin: blockAdmin('Контент — Видео'),
   imageURL: '/block-previews/video.svg',
   imageAltText: 'Превью: плеер с кнопкой воспроизведения',
   fields: [

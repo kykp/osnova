@@ -116,6 +116,15 @@ export const Pages: CollectionConfig = {
                 SliderBlock,
               ],
             },
+            {
+              name: 'blockVisibilityMenu',
+              type: 'ui',
+              admin: {
+                components: {
+                  Field: '@/components/BlockVisibilityMenu/BlockVisibilityMenu#BlockVisibilityMenu',
+                },
+              },
+            },
           ],
         },
         {

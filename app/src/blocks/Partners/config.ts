@@ -1,6 +1,5 @@
 import type { Block } from 'payload'
 
-import { blockAdmin } from '../_shared/blockAdmin'
 import { enabledField } from '../_shared/enabledField'
 
 export const PartnersBlock: Block = {
@@ -9,7 +8,6 @@ export const PartnersBlock: Block = {
     singular: 'Доверие — Логотипы партнёров',
     plural: 'Доверие — Логотипы партнёров',
   },
-  admin: blockAdmin('Доверие — Логотипы партнёров'),
   imageURL: '/block-previews/partners.svg',
   imageAltText: 'Превью: сетка логотипов партнёров',
   fields: [
