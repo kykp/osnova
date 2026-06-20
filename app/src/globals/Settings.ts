@@ -31,7 +31,7 @@ export const Settings: GlobalConfig = {
                       name: 'logo',
                       type: 'upload',
                       relationTo: 'media',
-                      label: 'Логотип в меню сайта',
+                      label: 'Логотип для светлой темы',
                       admin: {
                         width: '50%',
                         description: 'PNG (прозрачный) или SVG, горизонтальный, от 560×160 px.',
@@ -48,6 +48,16 @@ export const Settings: GlobalConfig = {
                       },
                     },
                   ],
+                },
+                {
+                  name: 'logoDark',
+                  type: 'upload',
+                  relationTo: 'media',
+                  label: 'Логотип для тёмной темы',
+                  admin: {
+                    description:
+                      'Необязательно. Загрузи, если основной логотип плохо читается на тёмном фоне. Если пусто — в тёмной теме показывается основной логотип.',
+                  },
                 },
                 {
                   name: 'siteTitle',

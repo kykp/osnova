@@ -154,6 +154,10 @@ h1,h2,h3{color:var(--ink)}
 .brand .logo{width:34px; height:34px; border-radius:10px; background:var(--ink); color:var(--bg);
   display:flex; align-items:center; justify-content:center}
 .brand .logo svg{width:19px;height:19px}
+.brand-logo{max-height:36px; width:auto; display:block}
+.brand-logo--dark{display:none}
+[data-theme='dark'] .brand-logo--light{display:none}
+[data-theme='dark'] .brand-logo--dark{display:block}
 .brand b{font-size:18px; font-weight:700}
 .brand span{font-size:11px; color:var(--muted); display:block; margin-top:-3px; letter-spacing:.02em; font-weight:500}
 .nav-links{display:none; margin-left:14px; gap:4px}

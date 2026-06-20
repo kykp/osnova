@@ -27,10 +27,12 @@ function resolveHref(item: MenuItem | SubItem): string | null {
 export function SiteHeader({
   title,
   logo,
+  logoDark,
   menu,
 }: {
   title: string
   logo: SiteHeaderLogo | null
+  logoDark: SiteHeaderLogo | null
   menu: MainMenu | null
 }) {
   const items = menu?.items ?? []
@@ -40,18 +42,26 @@ export function SiteHeader({
     href: resolveHref(item),
   }))
 
+  const hasBoth = Boolean(logo && logoDark)
+  const renderLogo = (img: SiteHeaderLogo, variant: 'light' | 'dark' | null) => (
+    <img
+      src={img.url}
+      alt={img.alt || title}
+      width={img.width ?? undefined}
+      height={img.height ?? undefined}
+      className={variant ? `brand-logo brand-logo--${variant}` : 'brand-logo'}
+    />
+  )
+
   return (
     <header className="nav">
       <div className="container nav-in">
         <a className="brand" href="/" aria-label={title || 'Главная'}>
-          {logo ? (
-            <img
-              src={logo.url}
-              alt={logo.alt || title}
-              width={logo.width ?? undefined}
-              height={logo.height ?? undefined}
-              style={{ maxHeight: 36, width: 'auto' }}
-            />
+          {logo || logoDark ? (
+            <>
+              {logo && renderLogo(logo, hasBoth ? 'light' : null)}
+              {logoDark && renderLogo(logoDark, hasBoth ? 'dark' : null)}
+            </>
           ) : (
             <span className="logo" aria-hidden="true">
               <svg
@@ -66,7 +76,7 @@ export function SiteHeader({
               </svg>
             </span>
           )}
-          {!logo && title ? (
+          {!logo && !logoDark && title ? (
             <span>
               <b>{title}</b>
             </span>

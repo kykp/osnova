@@ -49,21 +49,29 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     payload.findGlobal({ slug: 'main-menu' }),
   ])
 
-  const logoMedia = settings.logo
-  const logo: SiteHeaderLogo | null =
-    logoMedia && typeof logoMedia === 'object' && typeof logoMedia.url === 'string'
+  const toLogo = (media: unknown): SiteHeaderLogo | null =>
+    media && typeof media === 'object' && 'url' in media && typeof media.url === 'string'
       ? {
-          url: logoMedia.url,
-          alt: logoMedia.alt || settings.siteTitle || '',
-          width: logoMedia.width,
-          height: logoMedia.height,
+          url: media.url,
+          alt: ('alt' in media && typeof media.alt === 'string' && media.alt) ||
+            settings.siteTitle || '',
+          width: 'width' in media && typeof media.width === 'number' ? media.width : null,
+          height: 'height' in media && typeof media.height === 'number' ? media.height : null,
         }
       : null
+
+  const logo = toLogo(settings.logo)
+  const logoDark = toLogo(settings.logoDark)
 
   return (
     <html lang="ru" className={`${inter.variable} ${cormorant.variable}`}>
       <body>
-        <SiteHeader title={settings.siteTitle || ''} logo={logo} menu={menu} />
+        <SiteHeader
+          title={settings.siteTitle || ''}
+          logo={logo}
+          logoDark={logoDark}
+          menu={menu}
+        />
         <main id="top">{children}</main>
         <SiteFooter settings={settings} menu={menu} />
         <RevealOnScroll />

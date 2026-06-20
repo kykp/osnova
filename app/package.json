@@ -15,7 +15,8 @@
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "backup": "bash scripts/backup.sh",
     "seed:demo": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/seed-demo.mjs setup",
-    "seed:demo:clean": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/seed-demo.mjs teardown"
+    "seed:demo:clean": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/seed-demo.mjs teardown",
+    "seed:logos": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/seed-logos.mjs"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "latest",

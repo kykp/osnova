@@ -1293,6 +1293,10 @@ export interface Setting {
    */
   siteIcon?: (number | null) | Media;
   /**
+   * Необязательно. Загрузи, если основной логотип плохо читается на тёмном фоне. Если пусто — в тёмной теме показывается основной логотип.
+   */
+  logoDark?: (number | null) | Media;
+  /**
    * Показывается рядом с логотипом, во вкладке браузера и в поисковой выдаче. Если логотип уже содержит название — можно оставить пустым.
    */
   siteTitle?: string | null;
@@ -1355,6 +1359,7 @@ export interface MainMenu {
 export interface SettingsSelect<T extends boolean = true> {
   logo?: T;
   siteIcon?: T;
+  logoDark?: T;
   siteTitle?: T;
   siteDescription?: T;
   homePage?: T;
