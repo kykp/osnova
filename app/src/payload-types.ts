@@ -223,6 +223,10 @@ export interface Media {
 export interface Page {
   id: number;
   title: string;
+  /**
+   * Заполнится автоматически. Можно править вручную.
+   */
+  slug: string;
   layout?:
     | (
         | {
@@ -569,10 +573,6 @@ export interface Page {
      */
     image?: (number | null) | Media;
   };
-  /**
-   * Заполнится автоматически из заголовка. Можно править вручную.
-   */
-  slug: string;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -891,6 +891,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   layout?:
     | T
     | {
@@ -1160,7 +1161,6 @@ export interface PagesSelect<T extends boolean = true> {
         description?: T;
         image?: T;
       };
-  slug?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

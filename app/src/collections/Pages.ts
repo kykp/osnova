@@ -58,10 +58,37 @@ export const Pages: CollectionConfig = {
           label: 'Содержимое',
           fields: [
             {
-              name: 'title',
-              type: 'text',
-              label: 'Заголовок',
-              required: true,
+              type: 'row',
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  label: 'Заголовок',
+                  required: true,
+                  admin: { width: '60%' },
+                },
+                {
+                  name: 'slug',
+                  type: 'text',
+                  label: 'Адрес (slug)',
+                  required: true,
+                  unique: true,
+                  index: true,
+                  admin: {
+                    width: '40%',
+                    description: 'Заполнится автоматически. Можно править вручную.',
+                  },
+                  hooks: {
+                    beforeValidate: [
+                      ({ data, value }) => {
+                        if (value) return slugify(String(value))
+                        if (data?.title) return slugify(String(data.title))
+                        return value
+                      },
+                    ],
+                  },
+                },
+              ],
             },
             {
               name: 'layout',
@@ -129,27 +156,6 @@ export const Pages: CollectionConfig = {
           ],
         },
       ],
-    },
-    {
-      name: 'slug',
-      type: 'text',
-      label: 'Адрес (slug)',
-      required: true,
-      unique: true,
-      index: true,
-      admin: {
-        description: 'Заполнится автоматически из заголовка. Можно править вручную.',
-        position: 'sidebar',
-      },
-      hooks: {
-        beforeValidate: [
-          ({ data, value }) => {
-            if (value) return slugify(String(value))
-            if (data?.title) return slugify(String(data.title))
-            return value
-          },
-        ],
-      },
     },
   ],
 }
