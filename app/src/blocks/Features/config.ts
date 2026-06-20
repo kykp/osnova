@@ -1,14 +1,19 @@
 import type { Block } from 'payload'
 
+import { blockAdmin } from '../_shared/blockAdmin'
+import { enabledField } from '../_shared/enabledField'
+
 export const FeaturesBlock: Block = {
   slug: 'features',
   labels: {
     singular: 'Выгоды — Преимущества',
     plural: 'Выгоды — Преимущества',
   },
+  admin: blockAdmin('Выгоды — Преимущества'),
   imageURL: '/block-previews/features.svg',
   imageAltText: 'Превью: сетка из трёх пунктов с иконками',
   fields: [
+    enabledField,
     {
       name: 'heading',
       type: 'text',

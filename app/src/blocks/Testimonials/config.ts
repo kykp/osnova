@@ -1,14 +1,19 @@
 import type { Block } from 'payload'
 
+import { blockAdmin } from '../_shared/blockAdmin'
+import { enabledField } from '../_shared/enabledField'
+
 export const TestimonialsBlock: Block = {
   slug: 'testimonials',
   labels: {
     singular: 'Доверие — Отзывы',
     plural: 'Доверие — Отзывы',
   },
+  admin: blockAdmin('Доверие — Отзывы'),
   imageURL: '/block-previews/testimonials.svg',
   imageAltText: 'Превью: две карточки отзывов с цитатами и фото авторов',
   fields: [
+    enabledField,
     {
       name: 'heading',
       type: 'text',

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import type { Media } from '@/payload-types'
 import { pickMediaSize } from '@/utils/mediaSize'
@@ -88,20 +88,63 @@ export function Testimonials({ heading, variant, items }: TestimonialsProps) {
 }
 
 function SliderQuotes({ items }: { items: Item[] }) {
+  const trackRef = useRef<HTMLDivElement>(null)
   const [idx, setIdx] = useState(0)
+
+  const scrollToIdx = useCallback((i: number) => {
+    const track = trackRef.current
+    if (!track) return
+    const slide = track.children[i] as HTMLElement | undefined
+    if (!slide) return
+    track.scrollTo({ left: slide.offsetLeft - track.offsetLeft, behavior: 'smooth' })
+  }, [])
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+    let frame = 0
+    const onScroll = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        const children = Array.from(track.children) as HTMLElement[]
+        const x = track.scrollLeft + track.offsetLeft
+        let best = 0
+        let bestDist = Infinity
+        children.forEach((el, i) => {
+          const dist = Math.abs(el.offsetLeft - x)
+          if (dist < bestDist) {
+            bestDist = dist
+            best = i
+          }
+        })
+        setIdx(best)
+      })
+    }
+    track.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      cancelAnimationFrame(frame)
+      track.removeEventListener('scroll', onScroll)
+    }
+  }, [])
+
   const last = items.length - 1
+
   return (
-    <div className="reveal">
-      <div style={{ maxWidth: 720, marginInline: 'auto' }}>
-        <Quote item={items[idx]} />
+    <div className="quotes-slider reveal">
+      <div ref={trackRef} className="quotes-slider-track">
+        {items.map((it, i) => (
+          <div key={it.id ?? i} className="quotes-slide">
+            <Quote item={it} />
+          </div>
+        ))}
       </div>
-      <div className="slider-ctrl" style={{ justifyContent: 'center' }}>
+      <div className="slider-ctrl quotes-slider-ctrl">
         <div className="arrows">
           <button
             type="button"
             className="s-arrow"
             aria-label="Предыдущий"
-            onClick={() => setIdx((p) => (p === 0 ? last : p - 1))}
+            onClick={() => scrollToIdx(idx === 0 ? last : idx - 1)}
           >
             <span className="ic">
               <svg
@@ -120,7 +163,7 @@ function SliderQuotes({ items }: { items: Item[] }) {
             type="button"
             className="s-arrow"
             aria-label="Следующий"
-            onClick={() => setIdx((p) => (p === last ? 0 : p + 1))}
+            onClick={() => scrollToIdx(idx === last ? 0 : idx + 1)}
           >
             <span className="ic">
               <svg
@@ -141,7 +184,7 @@ function SliderQuotes({ items }: { items: Item[] }) {
             <i
               key={i}
               className={i === idx ? 'on' : ''}
-              onClick={() => setIdx(i)}
+              onClick={() => scrollToIdx(i)}
               role="button"
               tabIndex={0}
             />

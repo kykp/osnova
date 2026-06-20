@@ -14,9 +14,11 @@ type ProcessProps = {
   steps?: Step[] | null
 }
 
-export function Process({ heading, subheading, steps }: ProcessProps) {
+export function Process({ heading, subheading, variant, steps }: ProcessProps) {
   const list = steps ?? []
   if (list.length === 0) return null
+
+  const isVertical = variant === 'vertical'
 
   return (
     <section className="section" id="process">
@@ -28,7 +30,7 @@ export function Process({ heading, subheading, steps }: ProcessProps) {
             {subheading && <p className="sub">{subheading}</p>}
           </div>
         )}
-        <div className="steps reveal">
+        <div className={`steps reveal${isVertical ? ' is-vertical' : ''}`}>
           {list.map((s, i) => (
             <div key={s.id ?? i} className="step">
               <div className="node">
@@ -37,8 +39,10 @@ export function Process({ heading, subheading, steps }: ProcessProps) {
                 </span>
                 {i < list.length - 1 && <span className="line" />}
               </div>
-              <h3>{s.title}</h3>
-              {s.description && <p>{s.description}</p>}
+              <div className="step-body">
+                <h3>{s.title}</h3>
+                {s.description && <p>{s.description}</p>}
+              </div>
             </div>
           ))}
         </div>

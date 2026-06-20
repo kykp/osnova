@@ -29,6 +29,11 @@ async function fetchPicsum(seedKey, w, h) {
   return sharp(raw).jpeg({ quality: 80 }).toBuffer()
 }
 
+async function fetchUnsplash(url, maxW) {
+  const raw = await fetchBytes(url)
+  return sharp(raw).resize(maxW, null, { withoutEnlargement: true }).jpeg({ quality: 82 }).toBuffer()
+}
+
 async function fetchAvatar(id, size = 480) {
   const url = `https://i.pravatar.cc/${size}?img=${id}`
   return fetchBytes(url)
@@ -161,6 +166,14 @@ async function setup() {
 
   /* 1. Media */
   console.log('Fetching images (picsum.photos + pravatar.cc)…')
+  const heroImg = await uploadImage(
+    'demo-hero.jpg',
+    await fetchUnsplash(
+      'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2948&auto=format&fit=crop',
+      2400,
+    ),
+    'Крыло самолёта над облаками на закате',
+  )
   const cardImg1 = await uploadImage(
     'demo-card-1.jpg',
     await fetchPicsum('aerocharter-business-jet', 1200, 900),
@@ -196,6 +209,16 @@ async function setup() {
     'demo-photo-4.jpg',
     await fetchAvatar(53),
     'Дмитрий Ястребов, фото',
+  )
+  const photo5 = await uploadImage(
+    'demo-photo-5.jpg',
+    await fetchAvatar(11),
+    'Марина Сергеева, фото',
+  )
+  const photo6 = await uploadImage(
+    'demo-photo-6.jpg',
+    await fetchAvatar(67),
+    'Артём Веденеев, фото',
   )
 
   console.log('Generating partner wordmarks…')
@@ -495,6 +518,7 @@ async function setup() {
       heading: 'Частные перелёты без аэропортов и очередей',
       subheading:
         'Aerocharter — аренда бизнес-джетов и вертолётов по всей России. Подача в течение трёх часов после подтверждения, флот собственный, экипажи штатные.',
+      image: heroImg.id,
       cta: { label: 'Рассчитать перелёт', url: '#contactForm' },
     },
     {
@@ -569,6 +593,34 @@ async function setup() {
           author: 'Ирина Краснова',
           role: 'Директор по PR, ФК «Восход»',
           photo: photo2.id,
+        },
+        {
+          quote:
+            'Летаем семьёй четыре раза в год — детям, собакам, багажу всё ровно. Подача за два часа из Внуково, никаких сюрпризов на стойке.',
+          author: 'Елена Лоскутова',
+          role: 'Совладелец сети «Ритм»',
+          photo: photo3.id,
+        },
+        {
+          quote:
+            'Закрыли срочную поездку Москва — Геленджик в выходной. Подобрали борт за 40 минут, цена честная — без ночных и «премий за срочность».',
+          author: 'Дмитрий Ястребов',
+          role: 'Главный инженер, ПК «Кронверк»',
+          photo: photo4.id,
+        },
+        {
+          quote:
+            'Прозрачный расчёт, никакой агентской мутности. После четвёртого рейса оформили рамочный контракт — экономим час менеджеру на каждом запросе.',
+          author: 'Марина Сергеева',
+          role: 'Финансовый директор, «Бирюза Капитал»',
+          photo: photo5.id,
+        },
+        {
+          quote:
+            'Возил клиента в Анапу с трапом для коляски. Подача, посадка, разгрузка — всё чётко. Диспетчер сам проверил, что трап под наш борт совместим.',
+          author: 'Артём Веденеев',
+          role: 'Руководитель транспорта, фонд «Опора»',
+          photo: photo6.id,
         },
       ],
     },

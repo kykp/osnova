@@ -1,14 +1,19 @@
 import type { Block } from 'payload'
 
+import { blockAdmin } from '../_shared/blockAdmin'
+import { enabledField } from '../_shared/enabledField'
+
 export const FAQBlock: Block = {
   slug: 'faq',
   labels: {
     singular: 'Доверие — Частые вопросы',
     plural: 'Доверие — Частые вопросы',
   },
+  admin: blockAdmin('Доверие — Частые вопросы'),
   imageURL: '/block-previews/faq.svg',
   imageAltText: 'Превью: раскрывающиеся блоки с вопросами и ответами',
   fields: [
+    enabledField,
     {
       name: 'heading',
       type: 'text',

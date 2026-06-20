@@ -29,6 +29,7 @@ export function RenderBlocks({ blocks }: { blocks: Blocks | null | undefined }) 
   return (
     <Fragment>
       {blocks.map((block) => {
+        if ((block as { enabled?: boolean }).enabled === false) return null
         switch (block.blockType) {
           case 'hero':
             return <Hero key={block.id} {...block} />

@@ -35,7 +35,7 @@ export function Features({ heading, subheading, variant, items }: FeaturesProps)
         {variant === 'tabs' ? (
           <FeaturesTabs items={list} />
         ) : (
-          <div className="feat-grid reveal">
+          <div className={`feat-grid reveal is-${variant}`}>
             {list.map((it, i) => (
               <div key={it.id ?? i} className="feat">
                 {it.icon && (
@@ -59,37 +59,37 @@ export function Features({ heading, subheading, variant, items }: FeaturesProps)
 
 function FeaturesTabs({ items }: { items: Item[] }) {
   const [active, setActive] = useState(0)
-  const current = items[active]
   return (
-    <div className="feat-grid reveal" style={{ gridTemplateColumns: '1fr' }}>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 8,
-          justifyContent: 'center',
-          marginBottom: 32,
-        }}
-      >
+    <div className="feat-tabs reveal">
+      <div className="feat-tabs-bar" role="tablist">
         {items.map((it, i) => (
           <button
             key={it.id ?? i}
             type="button"
+            role="tab"
+            aria-selected={i === active}
             className={i === active ? 'btn btn-primary btn-sm' : 'btn btn-ghost btn-sm'}
             onClick={() => setActive(i)}
           >
-            {it.icon && <span style={{ marginRight: 6 }}>{it.icon}</span>}
+            {it.icon && <span className="feat-tabs-ic">{it.icon}</span>}
             {it.title}
           </button>
         ))}
       </div>
-      {current && (
-        <div className="feat" style={{ maxWidth: 720, marginInline: 'auto' }}>
-          {current.metric && <div className="metric">{current.metric}</div>}
-          <h3>{current.title}</h3>
-          {current.description && <p>{current.description}</p>}
-        </div>
-      )}
+      <div className="feat-tabs-stack">
+        {items.map((it, i) => (
+          <div
+            key={it.id ?? i}
+            role="tabpanel"
+            aria-hidden={i !== active}
+            className={`feat feat-tabs-panel${i === active ? ' is-active' : ''}`}
+          >
+            {it.metric && <div className="metric">{it.metric}</div>}
+            <h3>{it.title}</h3>
+            {it.description && <p>{it.description}</p>}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

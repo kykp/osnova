@@ -1,14 +1,19 @@
 import type { Block } from 'payload'
 
+import { blockAdmin } from '../_shared/blockAdmin'
+import { enabledField } from '../_shared/enabledField'
+
 export const StatsBlock: Block = {
   slug: 'stats',
   labels: {
     singular: 'Доверие — Статистика',
     plural: 'Доверие — Статистика',
   },
+  admin: blockAdmin('Доверие — Статистика'),
   imageURL: '/block-previews/stats.svg',
   imageAltText: 'Превью: ряд крупных цифр с подписями',
   fields: [
+    enabledField,
     {
       name: 'heading',
       type: 'text',

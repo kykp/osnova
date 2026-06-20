@@ -1,14 +1,19 @@
 import type { Block } from 'payload'
 
+import { blockAdmin } from '../_shared/blockAdmin'
+import { enabledField } from '../_shared/enabledField'
+
 export const CTABlock: Block = {
   slug: 'cta',
   labels: {
     singular: 'Целевое действие — CTA',
     plural: 'Целевое действие — CTA',
   },
+  admin: blockAdmin('Целевое действие — CTA'),
   imageURL: '/block-previews/cta.svg',
   imageAltText: 'Превью: цветная плашка с заголовком и кнопкой',
   fields: [
+    enabledField,
     {
       name: 'heading',
       type: 'text',

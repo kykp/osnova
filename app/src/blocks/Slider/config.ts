@@ -1,14 +1,19 @@
 import type { Block } from 'payload'
 
+import { blockAdmin } from '../_shared/blockAdmin'
+import { enabledField } from '../_shared/enabledField'
+
 export const SliderBlock: Block = {
   slug: 'slider',
   labels: {
     singular: 'Контент — Слайдер',
     plural: 'Контент — Слайдер',
   },
+  admin: blockAdmin('Контент — Слайдер'),
   imageURL: '/block-previews/slider.svg',
   imageAltText: 'Превью: слайдер с картинкой, стрелками и точками навигации',
   fields: [
+    enabledField,
     {
       name: 'heading',
       type: 'text',

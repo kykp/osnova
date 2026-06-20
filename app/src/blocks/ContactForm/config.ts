@@ -1,14 +1,19 @@
 import type { Block } from 'payload'
 
+import { blockAdmin } from '../_shared/blockAdmin'
+import { enabledField } from '../_shared/enabledField'
+
 export const ContactFormBlock: Block = {
   slug: 'contactForm',
   labels: {
     singular: 'Целевое действие — Форма заявки',
     plural: 'Целевое действие — Форма заявки',
   },
+  admin: blockAdmin('Целевое действие — Форма заявки'),
   imageURL: '/block-previews/contact-form.svg',
   imageAltText: 'Превью: форма с полями ввода и кнопкой «Отправить»',
   fields: [
+    enabledField,
     {
       name: 'heading',
       type: 'text',

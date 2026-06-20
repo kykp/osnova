@@ -1,14 +1,19 @@
 import type { Block } from 'payload'
 
+import { blockAdmin } from '../_shared/blockAdmin'
+import { enabledField } from '../_shared/enabledField'
+
 export const ProcessBlock: Block = {
   slug: 'process',
   labels: {
     singular: 'О проекте — Этапы',
     plural: 'О проекте — Этапы',
   },
+  admin: blockAdmin('О проекте — Этапы'),
   imageURL: '/block-previews/process.svg',
   imageAltText: 'Превью: нумерованные шаги, соединённые линией',
   fields: [
+    enabledField,
     {
       name: 'heading',
       type: 'text',

@@ -226,8 +226,14 @@ export interface Page {
   layout?:
     | (
         | {
+            enabled?: boolean | null;
+            variant: 'centered' | 'split' | 'overlay';
             heading: string;
             subheading?: string | null;
+            /**
+             * Используется в вариантах «Сплит» и «Картинка-фон».
+             */
+            image?: (number | null) | Media;
             cta?: {
               label?: string | null;
               /**
@@ -240,6 +246,7 @@ export interface Page {
             blockType: 'hero';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             subheading?: string | null;
             variant: 'horizontal' | 'vertical';
@@ -259,6 +266,7 @@ export interface Page {
             blockType: 'process';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             subheading?: string | null;
             variant: 'icons-grid' | 'cards-metric' | 'tabs';
@@ -282,6 +290,7 @@ export interface Page {
             blockType: 'features';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             items?:
               | {
@@ -300,6 +309,7 @@ export interface Page {
             blockType: 'cards';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             subheading?: string | null;
             items?:
@@ -320,6 +330,7 @@ export interface Page {
             blockType: 'stats';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             variant: 'cards' | 'slider';
             items?:
@@ -339,6 +350,7 @@ export interface Page {
             blockType: 'testimonials';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             subheading?: string | null;
             /**
@@ -350,6 +362,7 @@ export interface Page {
             blockType: 'team';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             items?:
               | {
@@ -370,6 +383,7 @@ export interface Page {
             blockType: 'partners';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             limit?: number | null;
             allLinkLabel?: string | null;
@@ -382,6 +396,7 @@ export interface Page {
             blockType: 'newsList';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             /**
              * Сортировка по дате документа (свежие сверху). 0 — показать все.
@@ -392,6 +407,7 @@ export interface Page {
             blockType: 'documentsList';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             items?:
               | {
@@ -405,6 +421,7 @@ export interface Page {
             blockType: 'faq';
           }
         | {
+            enabled?: boolean | null;
             heading: string;
             subheading?: string | null;
             button?: {
@@ -423,6 +440,7 @@ export interface Page {
             blockType: 'cta';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             /**
              * Например: «Москва, Тверская 1». Используется как метка на карте.
@@ -448,6 +466,7 @@ export interface Page {
             blockType: 'contacts';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             description?: string | null;
             showMessageField?: boolean | null;
@@ -466,6 +485,7 @@ export interface Page {
             blockType: 'contactForm';
           }
         | {
+            enabled?: boolean | null;
             content: {
               root: {
                 type: string;
@@ -486,6 +506,7 @@ export interface Page {
             blockType: 'richText';
           }
         | {
+            enabled?: boolean | null;
             image: number | Media;
             caption?: string | null;
             /**
@@ -497,6 +518,7 @@ export interface Page {
             blockType: 'image';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             provider: 'youtube' | 'rutube' | 'vk' | 'kinescope';
             /**
@@ -510,6 +532,7 @@ export interface Page {
             blockType: 'video';
           }
         | {
+            enabled?: boolean | null;
             heading?: string | null;
             /**
              * Если включено — слайды меняются автоматически каждые 5 секунд. Останавливается при наведении мыши.
@@ -874,8 +897,11 @@ export interface PagesSelect<T extends boolean = true> {
         hero?:
           | T
           | {
+              enabled?: T;
+              variant?: T;
               heading?: T;
               subheading?: T;
+              image?: T;
               cta?:
                 | T
                 | {
@@ -888,6 +914,7 @@ export interface PagesSelect<T extends boolean = true> {
         process?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               subheading?: T;
               variant?: T;
@@ -905,6 +932,7 @@ export interface PagesSelect<T extends boolean = true> {
         features?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               subheading?: T;
               variant?: T;
@@ -923,6 +951,7 @@ export interface PagesSelect<T extends boolean = true> {
         cards?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               items?:
                 | T
@@ -939,6 +968,7 @@ export interface PagesSelect<T extends boolean = true> {
         stats?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               subheading?: T;
               items?:
@@ -954,6 +984,7 @@ export interface PagesSelect<T extends boolean = true> {
         testimonials?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               variant?: T;
               items?:
@@ -971,6 +1002,7 @@ export interface PagesSelect<T extends boolean = true> {
         team?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               subheading?: T;
               limit?: T;
@@ -980,6 +1012,7 @@ export interface PagesSelect<T extends boolean = true> {
         partners?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               items?:
                 | T
@@ -995,6 +1028,7 @@ export interface PagesSelect<T extends boolean = true> {
         newsList?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               limit?: T;
               allLinkLabel?: T;
@@ -1005,6 +1039,7 @@ export interface PagesSelect<T extends boolean = true> {
         documentsList?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               limit?: T;
               id?: T;
@@ -1013,6 +1048,7 @@ export interface PagesSelect<T extends boolean = true> {
         faq?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               items?:
                 | T
@@ -1027,6 +1063,7 @@ export interface PagesSelect<T extends boolean = true> {
         cta?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               subheading?: T;
               button?:
@@ -1042,6 +1079,7 @@ export interface PagesSelect<T extends boolean = true> {
         contacts?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               address?: T;
               mapProvider?: T;
@@ -1056,6 +1094,7 @@ export interface PagesSelect<T extends boolean = true> {
         contactForm?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               description?: T;
               showMessageField?: T;
@@ -1069,6 +1108,7 @@ export interface PagesSelect<T extends boolean = true> {
         richText?:
           | T
           | {
+              enabled?: T;
               content?: T;
               id?: T;
               blockName?: T;
@@ -1076,6 +1116,7 @@ export interface PagesSelect<T extends boolean = true> {
         image?:
           | T
           | {
+              enabled?: T;
               image?: T;
               caption?: T;
               url?: T;
@@ -1085,6 +1126,7 @@ export interface PagesSelect<T extends boolean = true> {
         video?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               provider?: T;
               url?: T;
@@ -1096,6 +1138,7 @@ export interface PagesSelect<T extends boolean = true> {
         slider?:
           | T
           | {
+              enabled?: T;
               heading?: T;
               autoplay?: T;
               slides?:
