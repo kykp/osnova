@@ -1,7 +1,7 @@
 'use client'
 
 import { useAllFormFields, useField } from '@payloadcms/ui'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 import styles from './BlockVisibilityMenu.module.css'
@@ -16,6 +16,7 @@ const DISABLED_CLASS = 'osnova-block-disabled'
 export function BlockVisibilityMenu() {
   const [active, setActive] = useState<ActivePopup | null>(null)
   const [fields] = useAllFormFields()
+  const lastClickedRowRef = useRef<number | null>(null)
 
   useEffect(() => {
     const disabledIndexes = new Set<string>()
@@ -43,34 +44,6 @@ export function BlockVisibilityMenu() {
   }, [fields])
 
   useEffect(() => {
-    const onClickCapture = (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null
-      if (!target) return
-      const removeBtn = target.closest('.array-actions__remove') as HTMLElement | null
-      if (!removeBtn) return
-      if (!removeBtn.closest('[id^="layout-row-"]')) return
-      if (removeBtn.dataset.osnovaConfirmed === '1') {
-        delete removeBtn.dataset.osnovaConfirmed
-        return
-      }
-      e.stopPropagation()
-      e.preventDefault()
-      const row = removeBtn.closest('[id^="layout-row-"]') as HTMLElement | null
-      const label = row?.querySelector('.blocks-field__block-pill')?.textContent?.trim() || 'этот блок'
-      const ok = window.confirm(`Удалить «${label}»? Это действие нельзя отменить.`)
-      if (ok) {
-        removeBtn.dataset.osnovaConfirmed = '1'
-        removeBtn.click()
-      }
-    }
-
-    document.addEventListener('click', onClickCapture, true)
-    return () => document.removeEventListener('click', onClickCapture, true)
-  }, [])
-
-  useEffect(() => {
-    let lastClickedRow: number | null = null
-
     const onMouseDown = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null
       if (!target) return
@@ -79,7 +52,7 @@ export function BlockVisibilityMenu() {
       const row = trigger.closest('[id^="layout-row-"]') as HTMLElement | null
       if (!row) return
       const match = row.id.match(/layout-row-(\d+)/)
-      if (match) lastClickedRow = Number(match[1])
+      if (match) lastClickedRowRef.current = Number(match[1])
     }
 
     const detectFromNode = (node: HTMLElement) => {
@@ -87,8 +60,8 @@ export function BlockVisibilityMenu() {
       const buttonGroup = node.querySelector('.popup-button-list') as HTMLElement | null
       if (!buttonGroup) return
       if (!buttonGroup.querySelector('.array-actions__action')) return
-      if (lastClickedRow === null) return
-      setActive({ rowIndex: lastClickedRow, buttonGroupEl: buttonGroup })
+      if (lastClickedRowRef.current === null) return
+      setActive({ rowIndex: lastClickedRowRef.current, buttonGroupEl: buttonGroup })
     }
 
     const observer = new MutationObserver((mutations) => {
@@ -145,9 +118,7 @@ function VisibilityItem({
     <button
       type="button"
       className={`popup-button-list__button array-actions__action ${styles.menuButton}`}
-      onMouseDown={(e) => {
-        e.stopPropagation()
-      }}
+      onMouseDown={(e) => e.stopPropagation()}
       onClick={(e) => {
         e.stopPropagation()
         e.preventDefault()
